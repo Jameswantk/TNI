@@ -198,7 +198,7 @@ export default function App() {
         commercial: quoteConfidence.commercial,
       },
     }
-    console.info('Indara lead quote context', enrichedLead.quoteContext)
+    console.info('TNI lead quote context', enrichedLead.quoteContext)
     setLead(enrichedLead)
     setReference(makeReference())
     setStage('confirmed')

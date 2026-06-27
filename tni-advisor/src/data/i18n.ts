@@ -1,6 +1,6 @@
 import type { Lang } from '../types'
 
-// Bilingual UI strings (Thai + English). Placeholder copy pending Indara
+// Bilingual UI strings (Thai + English). Placeholder copy pending TNI
 // approval per the compliance guardrails (project memory §14). The customer can
 // toggle language at any time.
 
@@ -8,7 +8,7 @@ type Dict = Record<string, string>
 
 const en: Dict = {
   // shell
-  'app.title': 'Indara Advisor',
+  'app.title': 'TNI Advisor',
   'app.online': 'Online',
 
   // stepper
@@ -81,8 +81,8 @@ const en: Dict = {
   'est.whatsAssumed': "What's assumed",
   'est.because': 'Because {reasons} are still assumed — sharpen below.',
 
-  // Indara's read (advisor layer)
-  'read.title': "Indara's read",
+  // TNI's read (advisor layer)
+  'read.title': "TNI's read",
   'read.label.saving': 'Best next saving',
   'read.label.assumption': 'Biggest assumption',
   'read.label.warning': 'Watch out',
@@ -270,7 +270,7 @@ const en: Dict = {
   'why.whyCheap': 'You asked for the most affordable option.',
 
   // lead capture
-  'lead.intro': 'I can have an Indara advisor check the exact price for the {plan} plan. Your estimate may change after verification.',
+  'lead.intro': 'I can have an TNI advisor check the exact price for the {plan} plan. Your estimate may change after verification.',
   'lead.back': 'Back to plans',
   'lead.name': 'Name',
   'lead.phone': 'Phone',
@@ -278,7 +278,7 @@ const en: Dict = {
   'lead.optional': 'optional',
   'lead.callback': 'Preferred callback',
   'lead.renewal': 'Current policy renews',
-  'lead.consent': 'I consent to be contacted by an Indara advisor.',
+  'lead.consent': 'I consent to be contacted by an TNI advisor.',
   'lead.privacy': 'Privacy notice',
   'lead.submit': 'Request exact quote',
   'lead.human': 'Talk to a human advisor',
@@ -288,7 +288,7 @@ const en: Dict = {
   'cb.any': 'Any time',
 
   // confirmation
-  'conf.title': 'Done. Your request has been sent to Indara.',
+  'conf.title': 'Done. Your request has been sent to TNI.',
   'conf.ref': 'Reference',
   'conf.window': 'An advisor will contact you during your preferred time.',
   'conf.again': 'Start another quote',
@@ -357,15 +357,15 @@ const en: Dict = {
   'ai.answer.repair': 'Garage repair is usually cheaper. Dealer repair uses authorised service centres and often costs more.',
   'ai.answer.gapsForPlan': 'For the highlighted plan, the main watch-outs are: {gaps}. If any of these matter, compare the stronger tier before requesting the exact quote.',
   'ai.answer.gapsGeneral': 'Coverage gaps depend on the tier. Cheaper tiers may exclude theft/fire, solo accidents, flood, or dealer-centre repair.',
-  'ai.answer.escalate': "I don't have enough approved content to answer that safely. An Indara advisor should confirm it.",
+  'ai.answer.escalate': "I don't have enough approved content to answer that safely. An TNI advisor should confirm it.",
   'ai.cite.coverageTiers': 'Approved guide: coverage tiers',
   'ai.cite.driverRules': 'Approved guide: driver restrictions',
   'ai.cite.repair': 'Approved guide: repair options',
   'ai.cite.coverageGaps': 'Approved guide: coverage gaps',
   'ai.cite.handoff': 'Advisor handoff rule',
   'ai.brief.title': 'AI advisor brief',
-  'ai.brief.internalBadge': 'Internal Indara advisor view preview',
-  'ai.brief.internalNote': 'Demo note: this panel represents what Indara advisors see in their handoff or CRM view. It is not shown to the customer.',
+  'ai.brief.internalBadge': 'Internal TNI advisor view preview',
+  'ai.brief.internalNote': 'Demo note: this panel represents what TNI advisors see in their handoff or CRM view. It is not shown to the customer.',
   'ai.brief.body': 'Internal handoff summary prepared from the customer journey. Human advisor confirms final details.',
   'ai.brief.customerTitle': 'Customer context',
   'ai.brief.quoteTitle': 'Quote context',
@@ -382,7 +382,7 @@ const en: Dict = {
   'ai.brief.finalPrice': 'Confirm final insurer price, eligibility, and policy wording before quoting.',
   'ai.brief.gaps': 'Explain watch-outs: {gaps}',
   'ai.brief.gapsNone': 'No major card-level gaps shown, but policy wording still applies.',
-  'ai.brief.opening': 'Hi {name}, this is Indara. I have your request {reference} and can confirm the exact price and cover details from the estimate you reviewed.',
+  'ai.brief.opening': 'Hi {name}, this is TNI. I have your request {reference} and can confirm the exact price and cover details from the estimate you reviewed.',
 
   // misc
   'chip.placeholder': 'Or type your answer…',
@@ -398,7 +398,7 @@ const en: Dict = {
 }
 
 const th: Dict = {
-  'app.title': 'ที่ปรึกษา Indara',
+  'app.title': 'ที่ปรึกษา TNI',
   'app.online': 'ออนไลน์',
 
   'step.car': 'รถ',
@@ -466,8 +466,8 @@ const th: Dict = {
   'est.whatsAssumed': 'สิ่งที่สมมติไว้',
   'est.because': 'เพราะยังสมมติ {reasons} อยู่ — ปรับด้านล่างเพื่อความแม่นยำ',
 
-  // Indara's read (advisor layer)
-  'read.title': 'Indara วิเคราะห์ให้',
+  // TNI's read (advisor layer)
+  'read.title': 'TNI วิเคราะห์ให้',
   'read.label.saving': 'ลดราคาได้ต่อไป',
   'read.label.assumption': 'ข้อสมมติที่สำคัญสุด',
   'read.label.warning': 'ข้อควรระวัง',
@@ -650,7 +650,7 @@ const th: Dict = {
   'why.whyValue': 'คุณต้องการความคุ้มค่า ไม่ใช่แค่ถูกที่สุด',
   'why.whyCheap': 'คุณต้องการตัวเลือกที่ประหยัดที่สุด',
 
-  'lead.intro': 'ฉันให้ที่ปรึกษา Indara เช็คราคาจริงของแผน {plan} ให้ได้ ราคาประเมินอาจเปลี่ยนหลังการตรวจสอบ',
+  'lead.intro': 'ฉันให้ที่ปรึกษา TNI เช็คราคาจริงของแผน {plan} ให้ได้ ราคาประเมินอาจเปลี่ยนหลังการตรวจสอบ',
   'lead.back': 'กลับไปดูแผน',
   'lead.name': 'ชื่อ',
   'lead.phone': 'เบอร์โทร',
@@ -658,7 +658,7 @@ const th: Dict = {
   'lead.optional': 'ไม่บังคับ',
   'lead.callback': 'เวลาที่สะดวกให้ติดต่อ',
   'lead.renewal': 'ประกันปัจจุบันต่ออายุ',
-  'lead.consent': 'ฉันยินยอมให้ที่ปรึกษา Indara ติดต่อกลับ',
+  'lead.consent': 'ฉันยินยอมให้ที่ปรึกษา TNI ติดต่อกลับ',
   'lead.privacy': 'นโยบายความเป็นส่วนตัว',
   'lead.submit': 'ขอราคาจริง',
   'lead.human': 'คุยกับเจ้าหน้าที่',
@@ -667,7 +667,7 @@ const th: Dict = {
   'cb.evening': 'ช่วงเย็น',
   'cb.any': 'เวลาใดก็ได้',
 
-  'conf.title': 'เรียบร้อย! ส่งคำขอของคุณถึง Indara แล้ว',
+  'conf.title': 'เรียบร้อย! ส่งคำขอของคุณถึง TNI แล้ว',
   'conf.ref': 'หมายเลขอ้างอิง',
   'conf.window': 'ที่ปรึกษาจะติดต่อกลับในช่วงเวลาที่คุณเลือก',
   'conf.again': 'เริ่มประเมินใหม่',
@@ -734,15 +734,15 @@ const th: Dict = {
   'ai.answer.repair': 'ซ่อมอู่มักถูกกว่า ซ่อมศูนย์ใช้ศูนย์บริการที่ได้รับอนุญาตและมักมีราคาสูงกว่า',
   'ai.answer.gapsForPlan': 'สำหรับแผนที่แนะนำ จุดที่ควรระวังคือ: {gaps} หากเรื่องเหล่านี้สำคัญ ควรเทียบกับแผนที่คุ้มครองสูงกว่า',
   'ai.answer.gapsGeneral': 'ช่องว่างความคุ้มครองขึ้นกับระดับแผน แผนราคาถูกอาจไม่รวมโจรกรรม ไฟไหม้ อุบัติเหตุเดี่ยว น้ำท่วม หรือซ่อมศูนย์',
-  'ai.answer.escalate': 'ฉันยังไม่มีข้อมูลที่อนุมัติเพียงพอที่จะตอบอย่างปลอดภัย ควรให้ที่ปรึกษา Indara ยืนยัน',
+  'ai.answer.escalate': 'ฉันยังไม่มีข้อมูลที่อนุมัติเพียงพอที่จะตอบอย่างปลอดภัย ควรให้ที่ปรึกษา TNI ยืนยัน',
   'ai.cite.coverageTiers': 'คู่มือที่อนุมัติ: ระดับความคุ้มครอง',
   'ai.cite.driverRules': 'คู่มือที่อนุมัติ: เงื่อนไขผู้ขับ',
   'ai.cite.repair': 'คู่มือที่อนุมัติ: ตัวเลือกการซ่อม',
   'ai.cite.coverageGaps': 'คู่มือที่อนุมัติ: ช่องว่างความคุ้มครอง',
   'ai.cite.handoff': 'กฎการส่งต่อที่ปรึกษา',
   'ai.brief.title': 'บรีฟสำหรับที่ปรึกษา AI',
-  'ai.brief.internalBadge': 'ตัวอย่างหน้าภายในสำหรับที่ปรึกษา Indara',
-  'ai.brief.internalNote': 'หมายเหตุเดโม: กล่องนี้แสดงสิ่งที่ที่ปรึกษา Indara เห็นในหน้าส่งต่อหรือ CRM ไม่ได้แสดงให้ลูกค้าเห็น',
+  'ai.brief.internalBadge': 'ตัวอย่างหน้าภายในสำหรับที่ปรึกษา TNI',
+  'ai.brief.internalNote': 'หมายเหตุเดโม: กล่องนี้แสดงสิ่งที่ที่ปรึกษา TNI เห็นในหน้าส่งต่อหรือ CRM ไม่ได้แสดงให้ลูกค้าเห็น',
   'ai.brief.body': 'สรุปภายในจากเส้นทางของลูกค้า ที่ปรึกษายืนยันรายละเอียดจริงอีกครั้ง',
   'ai.brief.customerTitle': 'บริบทลูกค้า',
   'ai.brief.quoteTitle': 'บริบทใบเสนอราคา',
@@ -759,7 +759,7 @@ const th: Dict = {
   'ai.brief.finalPrice': 'ยืนยันราคา เงื่อนไขรับประกัน และข้อความกรมธรรม์จริงก่อนเสนอราคา',
   'ai.brief.gaps': 'อธิบายจุดที่ควรระวัง: {gaps}',
   'ai.brief.gapsNone': 'การ์ดนี้ไม่แสดงช่องว่างหลัก แต่ยังต้องยึดตามเงื่อนไขกรมธรรม์',
-  'ai.brief.opening': 'สวัสดีค่ะ/ครับ คุณ{name} จาก Indara นะคะ/ครับ ฉันมีคำขอเลขที่ {reference} และจะช่วยยืนยันราคาและรายละเอียดความคุ้มครองจากประมาณการที่คุณดูไว้',
+  'ai.brief.opening': 'สวัสดีค่ะ/ครับ คุณ{name} จาก TNI นะคะ/ครับ ฉันมีคำขอเลขที่ {reference} และจะช่วยยืนยันราคาและรายละเอียดความคุ้มครองจากประมาณการที่คุณดูไว้',
 
   'chip.placeholder': 'หรือพิมพ์คำตอบ…',
   'chip.popularBrands': 'ยี่ห้อยอดนิยม',

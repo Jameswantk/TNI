@@ -134,7 +134,7 @@ export interface PlanRecommendation extends Quote {
   recommended: boolean
 }
 
-// One row of "Indara's read" — the thin deterministic advisor layer that
+// One row of "TNI's read" — the thin deterministic advisor layer that
 // interprets the quote (best next saving / biggest assumption / coverage warning).
 // Rule-based, no LLM (project memory §4, §14). Targets point at existing controls.
 export type AdvisorTarget = 'ncb' | 'named' | 'repair' | 'dashcam' | 'mileage' | 'excess' | 'sharpen' | 'plans'

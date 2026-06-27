@@ -1994,8 +1994,8 @@ a {
   }
 }
 
-/* ===== Indara's read (advisor layer) ===== */
-.indara-read {
+/* ===== TNI's read (advisor layer) ===== */
+.TNI-read {
   border-color: var(--blue-100);
 }
 .ir-head {
@@ -2087,7 +2087,7 @@ a {
   background: var(--blue-100);
 }
 
-/* Indara's read — enter + resolve (tick & fade) transitions */
+/* TNI's read — enter + resolve (tick & fade) transitions */
 .ir-row:not(.resolved) {
   animation: irRowIn 0.25s ease;
 }
@@ -2118,7 +2118,7 @@ a {
   color: var(--success-tx);
 }
 
-/* Highlight pulse when an Indara's-read action points at a control */
+/* Highlight pulse when an TNI's-read action points at a control */
 .pulse {
   animation: ctrlPulse 1.1s ease;
   border-radius: var(--radius);

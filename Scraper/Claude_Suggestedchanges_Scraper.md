@@ -1,4 +1,4 @@
-# Claude — Suggested Changes: Indara Price Scraper
+# Claude — Suggested Changes: TNI Price Scraper
 
 Status: IMPLEMENTED IN SCRAPER CORE - this document began as Claude proposal. The scraper-side architecture and safety changes have now been implemented; production database/admin UI work remains a separate workstream.
 
@@ -14,7 +14,7 @@ gated behind a verification spike. See the changelog in section 8.
 ## 1. Context and goal
 
 The ultimate goal is a **complete, trustworthy database of indicative car-insurance
-premiums across many brands and models**, which the Indara AI agent reads to quote
+premiums across many brands and models**, which the TNI AI agent reads to quote
 customers. The scraper is the worker that populates those bands offline; the chat
 app never scrapes live.
 
@@ -365,11 +365,11 @@ corrected **Change 1.1 (observed coverage + DOM-scoped extraction)** — and run
 
 - Live scraping during a customer chat session (prohibited).
 - Bypassing CAPTCHA, anti-bot, login walls, access controls, or rate limits.
-- Presenting competitor prices as exact Indara quotes.
+- Presenting competitor prices as exact TNI quotes.
 - Final production database choice and admin UI build (tracked in 3.5, separate
   workstream).
 
-## 7. Open questions for Indara / the team
+## 7. Open questions for TNI / the team
 
 - Which brands/models are the priority "representative set" for first breadth?
 - Is low-volume live quote-form scraping (and catalog crawling) approved, or should

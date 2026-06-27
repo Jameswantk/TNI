@@ -13,7 +13,7 @@ import type {
 } from '../types'
 import { assessConfidence, insuredValue } from '../lib/pricing'
 import { buildAdvisorRead } from '../lib/advisorRead'
-import { IndaraRead } from './IndaraRead'
+import { TNIRead } from './TNIRead'
 
 interface Props {
   t: (key: string, params?: Record<string, string>) => string
@@ -49,7 +49,7 @@ export function PriceRail({ t, answers, controls, quote, lastUpdated, onControls
   const lowerRef = useRef<HTMLDivElement>(null)
   const sharpenRef = useRef<HTMLDivElement>(null)
 
-  // "Indara's read" rows point their actions at the existing controls below.
+  // "TNI's read" rows point their actions at the existing controls below.
   const readItems = buildAdvisorRead(answers, controls, quote)
   function pulseEl(el: Element | null | undefined) {
     if (!el) return
@@ -181,7 +181,7 @@ export function PriceRail({ t, answers, controls, quote, lastUpdated, onControls
         )}
       </div>
 
-      <IndaraRead t={t} items={readItems} onAction={onReadAction} />
+      <TNIRead t={t} items={readItems} onAction={onReadAction} />
 
       {answers.isEv && <EvNotice t={t} />}
 

@@ -1,13 +1,13 @@
-# Design mockups — Indara Advisor (customer web app)
+# Design mockups — TNI Advisor (customer web app)
 
 Static, browsable design artifacts for the customer-facing quote advisor. These are
 visual references for the section 27 flow in
-[`memory/indara-ai-project-memory.md`](../memory/indara-ai-project-memory.md); they are
+[`memory/TNI-ai-project-memory.md`](../memory/TNI-ai-project-memory.md); they are
 **not** wired to the quote engine and all numbers are illustrative placeholders.
 
 ## Files
 
-- `indara-advisor-mockup.html` — the **chosen design direction** (the "A + C hybrid"):
+- `tni-advisor-mockup.html` — the **chosen design direction** (the "A + C hybrid"):
   conversational advisor (A) with a guided stepper and a persistent live-price rail (C).
   Shows the desktop two-pane layout and the narrow-width (mobile) reflow on one page.
   Open it directly in a browser.

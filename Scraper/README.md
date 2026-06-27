@@ -1,6 +1,6 @@
-﻿# Indara Price Scraper
+# TNI Price Scraper
 
-This worker populates indicative pricing bands for the Indara AI Insurance Advisor. The chat app should read from pricing bands; it should not scrape external sites during a customer conversation.
+This worker populates indicative pricing bands for the TNI AI Insurance Advisor. The chat app should read from pricing bands; it should not scrape external sites during a customer conversation.
 
 ## Current Build
 
@@ -26,7 +26,7 @@ Live quote-form scraping and catalog crawling are available only through explici
 
 ## Why This Exists
 
-The Indara chat needs structured pricing ranges such as:
+The TNI chat needs structured pricing ranges such as:
 
 ```text
 Toyota Vios, 2020-2024, Bangkok, Type 1, age 25-35, garage repair
@@ -168,12 +168,12 @@ npm run smoke
 
 ## Important Compliance Boundary
 
-Live quote-form scraping and catalog crawling must be run only after Indara confirms approval. The worker must not:
+Live quote-form scraping and catalog crawling must be run only after TNI confirms approval. The worker must not:
 
 - Bypass CAPTCHA, anti-bot systems, login walls, or access controls.
 - Create fake accounts.
 - Evade rate limits.
-- Present competitor prices as exact Indara quotes.
+- Present competitor prices as exact TNI quotes.
 - Scrape live during a customer chat session.
 
 Supported authorized-testing controls:
@@ -190,7 +190,7 @@ Supported authorized-testing controls:
 - `LIVE_FORM_DIAGNOSTICS_DIR=data/live-diagnostics`: save screenshots and HTML for handled failures.
 - `LIVE_FORM_CAPTURE_SUCCESS_DIAGNOSTICS=true`: save diagnostics even when a premium is found, useful for coverage-tier verification.
 
-These controls are for sites and sessions Indara is authorized to test. They are not intended to bypass CAPTCHA, anti-bot systems, login walls, access controls, or rate limits.
+These controls are for sites and sessions TNI is authorized to test. They are not intended to bypass CAPTCHA, anti-bot systems, login walls, access controls, or rate limits.
 
 ## Current Live-Form Status
 

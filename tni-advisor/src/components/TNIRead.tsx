@@ -17,10 +17,10 @@ interface Row {
   resolved: boolean
 }
 
-// "Indara's read" — a quiet advisor note, not a separate product. No AI badge,
+// "TNI's read" — a quiet advisor note, not a separate product. No AI badge,
 // no chat input. When a suggestion is resolved by a real control change it ticks
 // to a "done" state and fades out, so it feels like working through the advice.
-export function IndaraRead({ t, items, onAction }: Props) {
+export function TNIRead({ t, items, onAction }: Props) {
   const startCollapsed = typeof window !== 'undefined' && window.matchMedia?.('(max-width: 820px)').matches
   const [open, setOpen] = useState(!startCollapsed)
   const [rows, setRows] = useState<Row[]>(() => items.map((i) => ({ item: i, key: keyOf(i), resolved: false })))
@@ -70,7 +70,7 @@ export function IndaraRead({ t, items, onAction }: Props) {
   const collapsed = summaryText ? t(summaryText) : ''
 
   return (
-    <div className="rail-card indara-read">
+    <div className="rail-card TNI-read">
       <button className="ir-head" onClick={() => setOpen(!open)} aria-expanded={open}>
         <span className="ir-title">
           <i className="ti ti-bulb" aria-hidden="true" /> {t('read.title')}

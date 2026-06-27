@@ -1,8 +1,8 @@
-# Indara Advisor — MVP web app (A + C hybrid)
+# TNI Advisor — MVP web app (A + C hybrid)
 
-A mobile-first, responsive **web app** for the Indara AI car-insurance advisor.
+A mobile-first, responsive **web app** for the TNI AI car-insurance advisor.
 Implements the "Advisor + live price rail" direction from the project memory
-(`IndaraAI` repo, section 27.8): a conversational advisor that prices the car in
+(`TNI` repo, section 27.8): a conversational advisor that prices the car in
 **3 taps**, explains the price, lets the user lower it, then captures a lead.
 Bilingual (Thai + English). Front end only — pricing data is a seeded
 **placeholder database**; the backend is stubbed.
@@ -67,7 +67,7 @@ src/
   data/
     flow.ts               3-tap core intake definition
     catalog.ts            brand → model picker + EV detection
-    i18n.ts               TH / EN strings (placeholder, pending Indara approval)
+    i18n.ts               TH / EN strings (placeholder, pending TNI approval)
     pricingData.ts        reads pricing bands; reference-age base-band lookup
     pricingBands.json     PLACEHOLDER DATABASE (regenerate via npm run seed)
     mockDb.ts             plan archetypes + coverage gaps
@@ -84,5 +84,5 @@ scripts/
 ## Not in v1 (next)
 
 Admin lead dashboard, real persistence, advisor notification, CRM adapter,
-analytics events, registration-book OCR autofill, Indara garage-network surface.
-See the project scope and memory docs in the `IndaraAI` repo.
+analytics events, registration-book OCR autofill, TNI garage-network surface.
+See the project scope and memory docs in the `TNI` repo.

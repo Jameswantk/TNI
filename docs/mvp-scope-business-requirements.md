@@ -1,10 +1,10 @@
-# Indara AI Insurance Advisor MVP
+# TNI AI Insurance Advisor MVP
 
 ## 1. Executive Summary
 
-Indara Insurance wants to build an all-in-one AI chatbox experience for car insurance. The intended experience is similar in commercial purpose to Thai online insurance aggregators such as Roojai, MrKumka, Rabbit Care, and CheckDi, but with a more interactive, conversational, and engaging user journey. Instead of starting with a long form, the customer should feel like they are speaking with a helpful insurance expert inside a messaging app such as LINE.
+TNI wants to build an all-in-one AI chatbox experience for car insurance. The intended experience is similar in commercial purpose to Thai online insurance aggregators such as Roojai, MrKumka, Rabbit Care, and CheckDi, but with a more interactive, conversational, and engaging user journey. Instead of starting with a long form, the customer should feel like they are speaking with a helpful insurance expert inside a messaging app such as LINE.
 
-The recommended MVP is intentionally narrow. It should help a customer answer the minimum questions needed to generate an indicative car-insurance quote range, present 2-3 recommended plan options, and capture a qualified lead for Indara's human advisor team. The MVP should not attempt to complete full online purchase, payment, binding coverage, claims handling, or final policy issuance.
+The recommended MVP is intentionally narrow. It should help a customer answer the minimum questions needed to generate an indicative car-insurance quote range, present 2-3 recommended plan options, and capture a qualified lead for TNI's human advisor team. The MVP should not attempt to complete full online purchase, payment, binding coverage, claims handling, or final policy issuance.
 
 The core business value is lead quality and conversion. The AI should reduce user friction, educate customers in plain language, and prepare a clean handoff to a licensed human advisor who can confirm the final quote and close the sale.
 
@@ -18,11 +18,11 @@ Create a mobile-first AI insurance advisor that:
 - Shows indicative quote ranges and plan recommendations.
 - Explains why each plan is suitable.
 - Captures high-intent leads after value has been shown.
-- Gives Indara's sales team a complete customer summary and transcript.
+- Gives TNI's sales team a complete customer summary and transcript.
 
 Positioning:
 
-> "An AI-powered digital insurance advisor for Indara that guides customers through car insurance selection, recommends suitable plans, explains tradeoffs in plain language, and hands off smoothly to human advisors when needed."
+> "An AI-powered digital insurance advisor for TNI that guides customers through car insurance selection, recommends suitable plans, explains tradeoffs in plain language, and hands off smoothly to human advisors when needed."
 
 ## 3. Market Context
 
@@ -33,7 +33,7 @@ Public online insurance experiences generally follow this pattern:
 - Rabbit Care and CheckDi emphasize comparing plans from multiple insurers and choosing coverage based on price, type, and benefits.
 - UK and US aggregators such as MoneySuperMarket, Confused.com, Compare the Market, and Insurify commonly ask for vehicle details, driver information, driving history, claims history, annual mileage, coverage preferences, and contact details.
 
-Indara's opportunity is not simply to duplicate a comparison form. The opportunity is to keep the quote engine discipline underneath while making the user experience conversational, friendly, and low-friction.
+TNI's opportunity is not simply to duplicate a comparison form. The opportunity is to keep the quote engine discipline underneath while making the user experience conversational, friendly, and low-friction.
 
 Reference sources:
 
@@ -52,9 +52,9 @@ Reference sources:
 
 The MVP should complete one primary job:
 
-> Help a customer chat naturally with Indara, answer the minimum car-insurance questions, receive indicative quote-range recommendations, and submit a qualified lead to a human advisor.
+> Help a customer chat naturally with TNI, answer the minimum car-insurance questions, receive indicative quote-range recommendations, and submit a qualified lead to a human advisor.
 
-Success means the customer reaches a useful recommendation without feeling they completed a long form, and Indara receives a lead that is materially better than a generic name and phone number.
+Success means the customer reaches a useful recommendation without feeling they completed a long form, and TNI receives a lead that is materially better than a generic name and phone number.
 
 ## 5. Target Users
 
@@ -69,7 +69,7 @@ Likely profile:
 - Wants fast price guidance before sharing contact details.
 - Needs confidence that a human advisor will confirm the final details.
 
-### 5.2 Indara Sales Advisor
+### 5.2 TNI Sales Advisor
 
 Needs:
 
@@ -79,7 +79,7 @@ Needs:
 - Ability to prioritize hot leads.
 - Simple lead statuses.
 
-### 5.3 Indara Admin / Management
+### 5.3 TNI Admin / Management
 
 Needs:
 
@@ -118,7 +118,7 @@ Out of scope:
 - Complex CRM automation.
 - Full multi-product insurance marketplace.
 - Fully autonomous regulated insurance advice.
-- Real-time insurer API integration unless Indara already has the APIs and wants to include them as a specific build dependency.
+- Real-time insurer API integration unless TNI already has the APIs and wants to include them as a specific build dependency.
 
 ## 7. Customer-Facing Features
 
@@ -129,7 +129,7 @@ The customer should begin directly in a chat-first experience. There should not 
 Requirements:
 
 - Mobile-first responsive chat interface.
-- Indara-branded AI advisor persona.
+- TNI-branded AI advisor persona.
 - Online/status indicator.
 - Thai / English toggle.
 - Free-text input.
@@ -142,7 +142,7 @@ Requirements:
 
 Example opening:
 
-> Hi, I am Indara's AI insurance advisor. I can help estimate your car insurance options first. No phone number needed yet. What car do you drive?
+> Hi, I am TNI's AI insurance advisor. I can help estimate your car insurance options first. No phone number needed yet. What car do you drive?
 
 ### 7.2 Guided Quote Intake
 
@@ -308,7 +308,7 @@ The plan explanation should be short and grounded in collected facts.
 
 Example:
 
-> Why Indara recommends this:
+> Why TNI recommends this:
 >
 > - Your car is still suitable for stronger coverage.
 > - You said you wanted good value, not only the cheapest price.
@@ -350,7 +350,7 @@ Required fields:
 
 Lead capture copy:
 
-> I can have an Indara advisor check the exact price for you. Your estimate may change after insurer verification. An advisor will confirm final price and coverage before you decide.
+> I can have an TNI advisor check the exact price for you. Your estimate may change after insurer verification. An advisor will confirm final price and coverage before you decide.
 
 Actions:
 
@@ -401,7 +401,7 @@ After lead submission, the customer should receive:
 
 Example:
 
-> Done. Your request has been sent to Indara.
+> Done. Your request has been sent to TNI.
 >
 > Reference: IND-24891
 >
@@ -411,7 +411,7 @@ Example:
 
 ### 8.1 Lead Dashboard
 
-Indara staff should have a simple internal dashboard.
+TNI staff should have a simple internal dashboard.
 
 Capabilities:
 
@@ -526,7 +526,7 @@ Rules:
 - AI must use approved coverage descriptions.
 - AI must trigger handoff for uncertain or complex cases.
 - AI should not request high-friction sensitive identifiers before value is shown.
-- AI should not ask for national ID, address, chassis number, or detailed accident facts during the initial MVP quote-range journey unless Indara explicitly approves that step.
+- AI should not ask for national ID, address, chassis number, or detailed accident facts during the initial MVP quote-range journey unless TNI explicitly approves that step.
 
 ### 9.3 Conversation Tone
 
@@ -555,7 +555,7 @@ Requirements:
 - Maintain audit logs for key events.
 - Allow admin review of conversations.
 
-Thailand online insurance sales may involve OIC requirements around approved policy wording, disclosure, intermediaries, and electronic sales processes. Indara should have legal/compliance review before launch, especially if the product moves beyond lead capture into purchase, payment, or binding policy issuance.
+Thailand online insurance sales may involve OIC requirements around approved policy wording, disclosure, intermediaries, and electronic sales processes. TNI should have legal/compliance review before launch, especially if the product moves beyond lead capture into purchase, payment, or binding policy issuance.
 
 ## 11. Data Model
 
@@ -661,7 +661,7 @@ Accessibility:
 
 ## 13. MVP User Journey
 
-1. Customer opens Indara AI Advisor.
+1. Customer opens TNI AI Advisor.
 2. Customer selects language or continues with detected/default language.
 3. AI asks for car brand.
 4. AI asks for model and year/age.
@@ -691,7 +691,7 @@ Design principles:
 
 Suggested screen structure:
 
-- Chat header: Indara Advisor, online status, language toggle.
+- Chat header: TNI Advisor, online status, language toggle.
 - Chat body: messages and quick replies.
 - Quote progress indicator: subtle, e.g. "Estimate progress: 7 / 10."
 - Input bar: free text plus send button.
@@ -780,13 +780,13 @@ Mitigation: Start with conservative ranges and improve with sales outcomes.
 
 ## 18. Open Questions
 
-- Which exact Indara products and insurer partners should appear in the MVP?
-- Does Indara want real insurer names in the MVP or generic plan categories first?
+- Which exact TNI products and insurer partners should appear in the MVP?
+- Does TNI want real insurer names in the MVP or generic plan categories first?
 - What historical quote data can be used to create indicative ranges?
-- Does Indara require Thai-only, English-only, or bilingual launch?
+- Does TNI require Thai-only, English-only, or bilingual launch?
 - Should LINE OA be included in MVP launch or treated as phase 2?
 - Who reviews and approves insurance wording?
-- What CRM or lead management system does Indara currently use?
+- What CRM or lead management system does TNI currently use?
 - What is the required callback SLA?
 - Should customers be able to upload documents in MVP, or only after advisor contact?
 

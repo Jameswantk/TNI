@@ -1,6 +1,6 @@
-# Indara AI Project Memory
+# TNI AI Project Memory
 
-This file is intended for future LLMs, developers, product managers, and implementation partners working on the Indara AI Insurance Advisor project. Treat this as durable project context. Update it when key scope, product, compliance, or implementation decisions change.
+This file is intended for future LLMs, developers, product managers, and implementation partners working on the TNI AI Insurance Advisor project. Treat this as durable project context. Update it when key scope, product, compliance, or implementation decisions change.
 
 Last updated: 2026-06-24
 
@@ -10,7 +10,7 @@ These were confirmed directly with the client and supersede the earlier open que
 
 - Indicative quotes: sourced from a custom price-scraping tool that samples Thai insurance aggregator sites (e.g. MrKumka https://www.mrkumka.com/en/car-insurance/, Roojai https://www.roojai.com/en/car-insurance/). See section 10 for the recommended pipeline design.
 - Plan cards: generic categories first (Best Budget / Best Value / Strongest Coverage). No real insurer names in the MVP.
-- Content approval: Indara approves all insurance wording, coverage descriptions, disclaimers, and FAQ content.
+- Content approval: TNI approves all insurance wording, coverage descriptions, disclaimers, and FAQ content.
 - Primary channel: web-chat first. LINE OA deferred to phase 2.
 - Language: bilingual (Thai + English) at launch.
 - Lead management: no existing CRM/LMS (greenfield). Launch on the built-in admin lead dashboard; integrate a cheaper-than-HubSpot external CRM later (Zoho CRM recommended for cost, Thai/SE-Asia presence, and a mature API/webhooks). Build the lead object CRM-agnostic with a thin adapter so the external CRM can be swapped without reworking the app.
@@ -19,9 +19,9 @@ Still open: the legal/ToS implications of scraping aggregator sites (see section
 
 ## 1. Project Identity
 
-Project name: Indara AI Insurance Advisor
+Project name: TNI AI Insurance Advisor
 
-Client / brand: Indara Insurance
+Client / brand: TNI
 
 Product type: AI-powered car insurance chatbox and lead qualification experience.
 
@@ -29,19 +29,19 @@ Primary channel: Mobile-first web chat. The experience should feel close to a me
 
 Current phase: MVP scope and business requirements.
 
-Repository: https://github.com/Jameswantk/IndaraAI.git
+Repository: https://github.com/Jameswantk/TNI.git
 
-Local path used during this documentation pass: C:\Users\james\IndaraAI
+Local path used during this documentation pass: C:\Users\james\TNI
 
 ## 2. High-Level Product Intent
 
-Indara wants an all-in-one AI chatbox experience for insurance. The user described the desired experience as similar in outcome to online insurance aggregators such as Roojai and MrKumka, but more interactive, engaging, and conversational. The AI should feel like a human insurance expert on a messaging app.
+TNI wants an all-in-one AI chatbox experience for insurance. The user described the desired experience as similar in outcome to online insurance aggregators such as Roojai and MrKumka, but more interactive, engaging, and conversational. The AI should feel like a human insurance expert on a messaging app.
 
 The MVP must remain narrow. It should not become a full insurance marketplace, policy issuance system, or autonomous regulated sales agent.
 
 The primary MVP job:
 
-> Help a customer chat naturally with Indara, answer the minimum car-insurance questions, receive indicative quote-range recommendations, and submit a qualified lead to a human advisor.
+> Help a customer chat naturally with TNI, answer the minimum car-insurance questions, receive indicative quote-range recommendations, and submit a qualified lead to a human advisor.
 
 ## 3. Core MVP Boundary
 
@@ -301,7 +301,7 @@ The pricing bands are populated by a custom price-scraping tool that samples Tha
 - Input-matching gap: aggregators compute quotes from inputs the MVP deliberately avoids (license plate, exact sub-model, national ID). The intake only collects brand / model / year-band / province / driver-age-band / usage / coverage type. So scrape across a grid of representative inputs and bucket results into bands that map to the coarser intake fields. The output is a range derived from sampled real quotes, not a mirror of any single aggregator's price.
 - Build per-site adapters so one site breaking does not break the others. Add monitoring/alerts for failed scrapes or garbage output.
 - Keep the admin manual-override of bands (section 13) so staff can correct or freeze bands if the scraper goes stale.
-- Legal/ToS: aggregator sites likely prohibit automated scraping. This is a business/legal decision Indara owns (they approve compliance). See section 18 open question. Safer alternatives if needed: a data-sharing/partnership arrangement with an aggregator, or an insurer rate table.
+- Legal/ToS: aggregator sites likely prohibit automated scraping. This is a business/legal decision TNI owns (they approve compliance). See section 18 open question. Safer alternatives if needed: a data-sharing/partnership arrangement with an aggregator, or an insurer rate table.
 
 ## 11. Human Handoff Rules
 
@@ -351,7 +351,7 @@ Required lead fields:
 
 Good lead capture copy:
 
-> I can have an Indara advisor check the exact price for you. Your estimate may change after insurer verification. An advisor will confirm final price and coverage before you decide.
+> I can have an TNI advisor check the exact price for you. Your estimate may change after insurer verification. An advisor will confirm final price and coverage before you decide.
 
 Confirmation should include:
 
@@ -361,7 +361,7 @@ Confirmation should include:
 
 ## 13. Admin Requirements
 
-Lead management at launch: Indara has no existing CRM/LMS (greenfield). The MVP launches on this built-in admin lead dashboard as the lead management system (effectively zero ongoing cost and purpose-built for the insurance funnel). A cheaper-than-HubSpot external CRM (Zoho CRM recommended) is integrated in a later phase. On lead creation, fire a single lead-created event consumed by (a) the advisor notification and (b) a CRM adapter, so the external CRM can be added/swapped without reworking the app.
+Lead management at launch: TNI has no existing CRM/LMS (greenfield). The MVP launches on this built-in admin lead dashboard as the lead management system (effectively zero ongoing cost and purpose-built for the insurance funnel). A cheaper-than-HubSpot external CRM (Zoho CRM recommended) is integrated in a later phase. On lead creation, fire a single lead-created event consumed by (a) the advisor notification and (b) a CRM adapter, so the external CRM can be added/swapped without reworking the app.
 
 Admin lead dashboard must show:
 
@@ -437,7 +437,7 @@ Primary business goals:
 - Improve lead quality.
 - Reduce advisor time spent gathering basic information.
 - Educate customers before sales contact.
-- Create a modern digital sales experience for Indara.
+- Create a modern digital sales experience for TNI.
 
 Metrics to track:
 
@@ -492,14 +492,14 @@ Resolved (2026-06-19, see section 0):
 - Historical quote data for pricing bands -> none; use a price-scraping tool to build bands (section 10.1).
 - Existing CRM -> none (greenfield); launch on built-in dashboard, add external CRM (Zoho recommended) later.
 - LINE OA in MVP -> no; web-chat first, LINE OA phase 2.
-- Who approves product wording -> Indara.
+- Who approves product wording -> TNI.
 - Thai-first vs bilingual -> bilingual (Thai + English) at launch.
 
 Still open / future agents should resolve:
 
-- Legal/ToS implications of scraping aggregator sites (MrKumka, Roojai, etc.). Indara owns this compliance decision. Consider data-sharing/partnership or insurer rate tables as alternatives.
-- Which exact Indara products should be represented (once generic phase is validated).
-- Does Indara have insurer APIs to integrate later?
+- Legal/ToS implications of scraping aggregator sites (MrKumka, Roojai, etc.). TNI owns this compliance decision. Consider data-sharing/partnership or insurer rate tables as alternatives.
+- Which exact TNI products should be represented (once generic phase is validated).
+- Does TNI have insurer APIs to integrate later?
 - What callback SLA should be promised? (Drives advisor notifications and staffing.)
 - How are new leads notified to the advisor team (email / LINE / WhatsApp)?
 - How many advisor seats will work leads (affects future CRM cost/assignment)?
@@ -511,7 +511,7 @@ Created in this pass:
 
 - README.md
 - docs/mvp-scope-business-requirements.md
-- memory/indara-ai-project-memory.md
+- memory/TNI-ai-project-memory.md
 - Scraper/README.md
 - Scraper/MEMORY.md
 - Scraper TypeScript worker scaffold
@@ -524,18 +524,18 @@ The `Scraper/` folder is the offline pricing-band worker. Its first implementati
 
 ## 20. Customer Web App Build Status (2026-06-19)
 
-A first mockup version of the customer web app has been scaffolded (workspace `indara-advisor/`, now committed to this repo 2026-06-23; see section 20.1 for the current A + C hybrid build).
+A first mockup version of the customer web app has been scaffolded (workspace `tni-advisor/`, now committed to this repo 2026-06-23; see section 20.1 for the current A + C hybrid build).
 
 - Stack: React + Vite + TypeScript. Mobile-first responsive (two-pane chat + results on desktop, stacked on mobile). Bilingual TH/EN with a live toggle.
 - Flow implemented end to end: conversational intake (one question at a time, quick-reply chips + free text, "Not sure", progress indicator) -> quote summary -> 2-3 generic plan cards (Best Budget / Best Value / Strongest Coverage) -> lead capture (gated after value) -> confirmation with reference number.
 - Deterministic quote engine; LLM never invents prices. UI labels estimates as indicative.
-- Placeholder data stands in for the backend: bundled pricing seed + placeholder TH/EN copy (pending Indara content approval). Built and verified working; no admin dashboard or persistence yet.
+- Placeholder data stands in for the backend: bundled pricing seed + placeholder TH/EN copy (pending TNI content approval). Built and verified working; no admin dashboard or persistence yet.
 
 It is a responsive web app, not a native mobile app. The customer side is public web; the admin side will be an authenticated web area.
 
 ### 20.1 A + C hybrid implementation status (2026-06-23, Claude)
 
-The customer web app was rebuilt to the section 27.8 "Advisor + live price rail" direction and committed to this repo under `indara-advisor/`. Implemented and verified (type-checks, production build, driven end to end in-browser):
+The customer web app was rebuilt to the section 27.8 "Advisor + live price rail" direction and committed to this repo under `tni-advisor/`. Implemented and verified (type-checks, production build, driven end to end in-browser):
 
 - 3-tap core intake in chat with a cascading Brand -> Model -> Year catalog picker (`data/catalog.ts`; 18 seeded vehicles mapping to exact pricing bands, free-typed vehicles fall back to the segment default).
 - Guided stepper (Car -> Cover -> Driver -> Tune price).
@@ -600,7 +600,7 @@ mileage tiers, at-fault claims); trim (priority 6) remains deferred. The §30.2
 named-driver tradeoff and §30.3 compositional-confidence amendments discussed
 earlier are now implemented as described here.
 
-### 20.4 "Indara's read" advisor layer implemented (2026-06-23, Claude)
+### 20.4 "TNI's read" advisor layer implemented (2026-06-23, Claude)
 
 Added a compact, deterministic advisor card in the price rail (slot 2: after the
 live estimate, before "Why this price?"), per the agreed plan. No chatbot, no new
@@ -617,7 +617,7 @@ questions, no LLM — it interprets existing state (§4, §14).
   then the coverage-tier gap (Type 3+ theft/fire/solo, Type 2+ solo), then garage.
 - Commercial / delivery use pivots the card to a single advisor-confirm row — no
   price optimization (§30.5 / §11).
-- `components/IndaraRead.tsx`: quiet card (no AI badge, no chat input), collapsed
+- `components/TNIRead.tsx`: quiet card (no AI badge, no chat input), collapsed
   to a one-line summary on mobile (<=820px). Row actions scroll to the relevant
   existing control (`Confirm`/`Adjust` -> Lower, `Sharpen` -> Sharpen, `See plans`
   -> recommendations); they never create new flows.
@@ -628,9 +628,9 @@ Deliberately NOT built (kept out of MVP): open-ended chat, garage finder, renewa
 advisor, LINE share, full plan Q&A, trim/hybrid pricing, extra EV toggles, policy
 wallet, accounts.
 
-### 20.5 Price-rail P1 done + "Indara's read" polish (2026-06-23)
+### 20.5 Price-rail P1 done + "TNI's read" polish (2026-06-23)
 
-Builds on 20.3 (the two-group rail) and 20.4 (Indara's read).
+Builds on 20.3 (the two-group rail) and 20.4 (TNI's read).
 
 Price-rail P1 plan (docs/price-rail-implementation-plan.md) fully implemented by
 Codex (commits b072b35 / 9b7d441):
@@ -654,7 +654,7 @@ usage gate, mileage tiers, at-fault claims). Priority 6 (trim / variant) remains
 deferred, as do P2/P3 (EV battery/charger pricing, license tenure, optional-
 benefit limits in compare).
 
-"Indara's read" refinements (Claude, commits c442f94 / 9e4a28f / 417a777):
+"TNI's read" refinements (Claude, commits c442f94 / 9e4a28f / 417a777):
 
 - Resolve feedback: when a real control change resolves a read suggestion (set
   province, confirm NCB, etc.) the row ticks to a green "Applied / Confirmed"
@@ -669,27 +669,27 @@ benefit limits in compare).
   the blue lead border only while NCB is unanswered (none / not sure), then calms
   to a normal border (color transition, no layout shift) once a value is chosen.
 
-### 20.6 Codex-audit round 2: Indara's read accuracy + honest framing (2026-06-24, Claude)
+### 20.6 Codex-audit round 2: TNI's read accuracy + honest framing (2026-06-24, Claude)
 
-Codex re-reviewed the §20.4/20.5 "Indara's read" build (ran it live, source pass)
+Codex re-reviewed the §20.4/20.5 "TNI's read" build (ran it live, source pass)
 and flagged four issues; Claude fixed all four plus a fifth that the highest-delta
 sort exposed. Commits 448991d + 5b33a20, verified live in-browser end to end.
 
 - [P2] Segment / free-typed vehicle now surfaces the RIGHT assumption. When
   `quote.quality === 'segment'` (car not in catalog, priced off similar vehicles),
-  Indara's read biggest-assumption row says "I matched your car to similar
+  TNI's read biggest-assumption row says "I matched your car to similar
   vehicles. The exact model may affect the price." instead of misblaming area.
   (`lib/advisorRead.ts` biggestAssumption; new `read.assume.vehicle` TH/EN.)
 - [P2] Named-driver warnings split by plan type. `any30` → "drivers under 30 may
   not be covered", `any25` → "under 25", `named` → "only listed driver(s)" — in
-  BOTH Indara's read (coverageWarning) and the rail's inline ctrl-warn
+  BOTH TNI's read (coverageWarning) and the rail's inline ctrl-warn
   (`PriceRail.tsx`). New keys `read.warn.any30/any25`, `named.tradeoff.named/any30/
   any25` (the old single `named.tradeoff` / `read.warn.named` wording was wrong for
   age-restricted plans).
 - [P3] Commercial pivot clears stale rows. Switching to Business/delivery now
   immediately cancels pending fade timers and replaces the row set with the single
   advisor-confirm warning, instead of letting resolved "Applied/Confirmed" rows
-  linger ~1.3s above it (`IndaraRead.tsx`).
+  linger ~1.3s above it (`TNIRead.tsx`).
 - [P3] Best-next-saving ranks by REAL THB delta. `bestSaving` now computes the
   saving for every available lever and sorts descending, instead of returning the
   first match in a fixed priority ladder.
@@ -704,7 +704,7 @@ Live walkthrough (Claude, desktop + mobile) also re-verified: Good value → Typ
 mapping holds; 3-card ladder (Type 3+/2+/1) with coverage-gap + upgrade-delta +
 compare table; lead capture (proper id/label[for], consent in a <label>) →
 confirmation with reference; TH/EN toggle preserves entered data; mobile sticky
-price bar + Indara's-read one-line collapse; "Should I claim?" at-fault/NCB math
+price bar + TNI's-read one-line collapse; "Should I claim?" at-fault/NCB math
 correct. No console errors anywhere.
 
 ### 20.7 Intake back / change navigation (2026-06-24, Codex)
@@ -734,13 +734,13 @@ only be undone by reloading the page. Codex commit 0876129 (`App.tsx`,
 
 Public demo deployed to Netlify:
 
-- Live URL: `https://indara-advisor-demo.netlify.app`
-- Netlify admin: `https://app.netlify.com/projects/indara-advisor-demo`
+- Live URL: `https://tni-advisor-demo.netlify.app`
+- Netlify admin: `https://app.netlify.com/projects/tni-advisor-demo`
 - Site ID: `39ab2641-7520-40ac-9d8a-48f82ae3b09c`
 
-Deployment was created from the local `indara-advisor/dist` production build using
+Deployment was created from the local `tni-advisor/dist` production build using
 Netlify CLI, not yet configured as GitHub-connected continuous deployment. The
-live smoke test loaded the page, verified the title `Indara Advisor`, and clicked
+live smoke test loaded the page, verified the title `TNI Advisor`, and clicked
 Toyota into the model step with no browser console errors.
 
 Exposure note for client demos: this is a static frontend deployment. It does not
@@ -786,7 +786,7 @@ Future moats (roadmap, not MVP): registration-book (เล่มทะเบี�
 
 ## 23. Recommended Additional Features (Not Yet Confirmed)
 
-Surfaced as recommendations; confirm with Indara before building:
+Surfaced as recommendations; confirm with TNI before building:
 
 - Real-time advisor notification on new lead (highest priority -- a dashboard alone will not be watched; pairs with the lead-created event in section 13).
 - Lead assignment / claim locking to prevent double-contact.
@@ -822,7 +822,7 @@ Tier 1 -- leverage the existing deterministic band engine (low effort):
 Tier 2 -- signature bets:
 
 - Registration-book (เล่มทะเบียน) / car-photo OCR autofill (the "magic moment").
-- Surface Indara's approved repair-shop network (~1,424 garages, 22 branches per indara.co.th) as "approved garages near you" when garage repair is chosen.
+- Surface TNI's approved repair-shop network (~1,424 garages, 22 branches per TNI.co.th) as "approved garages near you" when garage repair is chosen.
 - Data-freshness / confidence transparency, using the band `confidence` and `lastScrapedAt`.
 
 Tier 3 -- retention: renewal reminder + price-watch; save & resume / share via LINE (no account).
@@ -831,7 +831,7 @@ Tier 4 -- vertical wedges: EV-aware flow (battery/charging cover; insurers still
 
 Recommended next three to build: 3-tap first estimate, "Lower my price" controls, and price-factor breakdown. Registration-book OCR remains the post-MVP signature moment.
 
-Compliance: do NOT present competitor prices as quotes even though pricing data is scraped from aggregators; at most a generic "typical market range" framing, and only with Indara sign-off.
+Compliance: do NOT present competitor prices as quotes even though pricing data is scraped from aggregators; at most a generic "typical market range" framing, and only with TNI sign-off.
 
 ## 26. Scraper Core Implementation Details (2026-06-19)
 
@@ -855,8 +855,8 @@ Operational guidance:
 
 - The scraper should still run offline/scheduled, never during a customer conversation.
 - The chat app should consume generated pricing bands or the future production DB, not live websites.
-- The data will not be truly comprehensive until Indara approves broader runs and the grid is populated across coverage tiers, vehicles, provinces, and driver/usage factors.
-- Continue treating legal/ToS approval for competitor quote-form automation as an Indara business/compliance decision.
+- The data will not be truly comprehensive until TNI approves broader runs and the grid is populated across coverage tiers, vehicles, provinces, and driver/usage factors.
+- Continue treating legal/ToS approval for competitor quote-form automation as an TNI business/compliance decision.
 
 ## 27. MVP Scope Refinement: Price in 3 Taps + Lower My Price (2026-06-22)
 
@@ -901,7 +901,7 @@ This keeps the product simple, but makes it feel unlike a normal aggregator form
    Include what is not covered and what changes the price.
 
 8. Lead capture after value
-   "Want an Indara advisor to check exact options?"
+   "Want an TNI advisor to check exact options?"
    Capture name, phone/LINE, preferred callback time, consent.
 ```
 
@@ -941,8 +941,8 @@ Build the MVP around these product promises, in this order:
 3. **Explain coverage gaps**
    Do not only say "Type 1 / 2+ / 3+". Say what is not covered, and what extra THB/year buys.
 
-4. **Use Indara-specific trust**
-   Surface Indara's branch and garage network when relevant, especially after province / repair preference. This is harder for generic aggregators to copy than a chat UI.
+4. **Use TNI-specific trust**
+   Surface TNI's branch and garage network when relevant, especially after province / repair preference. This is harder for generic aggregators to copy than a chat UI.
 
 5. **Preserve price before phone number**
    The customer sees an indicative range before lead capture. This supports trust, but is not the unique wedge.
@@ -980,7 +980,7 @@ Note: an OIC two-factor discount system (driving history + claims, 5 levels each
 
 ### 27.7 Implementation mapping
 
-Against the existing `indara-advisor/` workspace (section 20):
+Against the existing `tni-advisor/` workspace (section 20):
 
 - `data/flow.ts`: split steps into `coreEstimate`, `priceControls`, `recommendations`, and `leadCapture`.
 - `components/ChatPanel.tsx`: add the cascading Brand -> Model -> Year picker and keep the first three taps fast.
@@ -994,7 +994,7 @@ The goal is not to build a chatbot that asks fewer questions. The goal is to bui
 
 ### 27.8 Chosen design direction: "Advisor + live price rail" (A + C hybrid, 2026-06-22)
 
-Three UI directions were mocked and compared: A "The Advisor" (conversational two-pane), B "The Price Cockpit" (calculator-forward, price front-and-centre), and C "Guided" (stepper + sticky live-price rail). Chosen direction: an **A + C hybrid**. Browsable mockups live in the repo `design/` folder (`design/indara-advisor-mockup.html`, `design/README.md`).
+Three UI directions were mocked and compared: A "The Advisor" (conversational two-pane), B "The Price Cockpit" (calculator-forward, price front-and-centre), and C "Guided" (stepper + sticky live-price rail). Chosen direction: an **A + C hybrid**. Browsable mockups live in the repo `design/` folder (`design/tni-advisor-mockup.html`, `design/README.md`).
 
 The hybrid:
 
@@ -1039,7 +1039,7 @@ Triggers ONLY when the Brand -> Model -> Year picker detects an EV (BYD, Tesla, 
 
 ### 28.3 Later roadmap notes (not MVP)
 
-- Digital policy wallet / instant proof of coverage: from 1 Jan 2026, Thai law moves motor policies toward fully digital issuance. Precise scope: the compulsory Por Ror Bor going fully digital is confirmed; treat the broader voluntary-policy experience as an operations/retention item, not a lead-gen differentiator. Post-purchase; aligns Indara with the mandate.
+- Digital policy wallet / instant proof of coverage: from 1 Jan 2026, Thai law moves motor policies toward fully digital issuance. Precise scope: the compulsory Por Ror Bor going fully digital is confirmed; treat the broader voluntary-policy experience as an operations/retention item, not a lead-gen differentiator. Post-purchase; aligns TNI with the mandate.
 - Light usage-based / low-mileage framing: usage-based insurance (telematics / pay-as-you-drive via OBD or app telemetry) is a rising Thai motor trend AND already exists in-market — Thaivivat ships a real "no drive, no pay" on-off pay-per-use product via an AIS IoT device (premium from ~600 baht, up to ~40% cheaper). We do NOT have telematics hardware or a pay-per-use carrier product, so for MVP lean into the existing low-mileage "Lower my price" chip framed honestly as "low mileage may qualify for cheaper options" — do NOT call it pay-as-you-drive or imply telematics we do not have. Treat Thaivivat as the real pay-per-use benchmark a savvy user may compare against. (Corrects an earlier draft of this note that implied no such product exists.)
 
 Sources from the scan: Motorist (claim vs NCB math), Roojai (NCB ladder, EV battery/charger coverage), Baker McKenzie / Lexology (OIC Registrar Order 47/2566 BEV rules), Bangkok Post (EV claim costs), OIC CIT (usage-based insurance), and Thai motor-insurance market reports (digital-policy mandate, UBI trend).
@@ -1065,7 +1065,7 @@ How to evaluate (to stay honest):
 
 - Actively seek DISCONFIRMING evidence — a Thai or global player already shipping the full bundle, or shipping enough of it that the gap is shallow.
 - Separate two questions: (a) does the integrated product exist? and (b) even if it does not, is the bundle a DURABLE moat or quickly copyable given that conversational-AI and quote-adjust tech are commoditised? Both are open.
-- Weigh Indara-specific assets (brand, 77-year history, branch + garage network, the pricing-band data pipeline) as part of defensibility, not just the UX.
+- Weigh TNI-specific assets (brand, 77-year history, branch + garage network, the pricing-band data pipeline) as part of defensibility, not just the UX.
 
 ### 29.1 Verdict (2026-06-22, corroborated by an independent Codex analysis)
 
@@ -1091,9 +1091,9 @@ Evidence map — what exists, and where:
 What looks open (the white space):
 
 - The integrated sequence itself: quick estimate -> "why this price?" -> live "Lower my price" -> coverage-gap education -> lead capture -> ownership tools.
-- An NCB-led live "Lower my price" moment; a "Should I claim?" calculator integrated into the advisor (not found in Thai aggregators); an EV conditional branch off the picker; and Indara's garage/branch trust surfaced inside the quote UX.
+- An NCB-led live "Lower my price" moment; a "Should I claim?" calculator integrated into the advisor (not found in Thai aggregators); an EV conditional branch off the picker; and TNI's garage/branch trust surfaced inside the quote UX.
 
-Defensibility (honest): the enabling tech (conversational AI, quote-adjust UX) is commoditised and copyable — a well-funded incumbent (e.g. Roojai, $60m Series C Nov 2025) could replicate the UX. So the moat is NOT the tech; it is integration + Thai localisation/bilingual + Indara-specific assets (brand / 77-year history, branch + 1,424-garage network, the pricing-band data pipeline) + tight execution. Differentiation is real but execution-dependent, not structurally protected.
+Defensibility (honest): the enabling tech (conversational AI, quote-adjust UX) is commoditised and copyable — a well-funded incumbent (e.g. Roojai, $60m Series C Nov 2025) could replicate the UX. So the moat is NOT the tech; it is integration + Thai localisation/bilingual + TNI-specific assets (brand / 77-year history, branch + 1,424-garage network, the pricing-band data pipeline) + tight execution. Differentiation is real but execution-dependent, not structurally protected.
 
 Positioning that follows: lead with "Understand and control your car-insurance price before you speak to anyone." NOT "get a quote fast", and NOT "AI chatbot".
 
@@ -1107,7 +1107,7 @@ Codex follow-up question tested: "Is there already a product like this on the ma
 
 Feature-by-feature market read:
 
-| Indara component | Market status | Product implication |
+| TNI component | Market status | Product implication |
 |---|---|---|
 | Fast quote | Exists widely | Do not lead with this; speed is expected. |
 | No phone before quote | Exists | Preserve it for trust, but do not claim it as the unique hook. |
@@ -1119,7 +1119,7 @@ Feature-by-feature market read:
 | NCB-led visible price-drop moment | Not clearly found | Strong MVP interaction: default no/unknown NCB, then let the price drop when claim-free years are selected. |
 | "Should I claim?" calculator | Not found in Thai aggregators | Strong roadmap lead magnet / ownership tool; frame as educational only. |
 | EV-aware conditional branch from car picker | Partial | EV products exist, but the opportunity is contextual education inside the quote journey. |
-| Indara garage / branch trust inside quote UX | Indara-specific | Use as contextual proof, not generic marketing. |
+| TNI garage / branch trust inside quote UX | TNI-specific | Use as contextual proof, not generic marketing. |
 
 Thai competitor notes:
 
@@ -1128,11 +1128,11 @@ Thai competitor notes:
 - CheckDi: strong speed and breadth claim (~30s / many insurers), best-price guarantee, instalments, class education. Looks like a comparison engine, not an interactive advisor cockpit.
 - Rabbit Care: strong broker / comparison proposition with savings, NCB, named-driver, instalment, and service messaging. Discounts are marketed clearly, but not found as a live NCB-led price-control flow.
 - Gengmak: compares many insurers and uses LINE-style assistance, but asks phone/email before quote in the public form seen. Useful contrast for why lead capture after value matters.
-- Thaivivat: real Thai UBI / pay-per-use competitor. This makes it especially important that Indara not imply true pay-as-you-drive unless Indara has a real insurer/telematics product.
+- Thaivivat: real Thai UBI / pay-per-use competitor. This makes it especially important that TNI not imply true pay-as-you-drive unless TNI has a real insurer/telematics product.
 
 Global near-match notes:
 
-- Progressive Name Your Price / coverage calculator: closest global ancestor for price-control thinking. It validates budget/coverage adjustment as a product pattern, but it is not a neutral Thai motor advisor and does not cover the Indara bundle.
+- Progressive Name Your Price / coverage calculator: closest global ancestor for price-control thinking. It validates budget/coverage adjustment as a product pattern, but it is not a neutral Thai motor advisor and does not cover the TNI bundle.
 - The Zebra: quick estimate and "why we ask" style explanations; useful proof that explanation improves trust, but still closer to calculator/comparison than live savings cockpit.
 - Jerry: closest strategic analogue as a broader car-ownership assistant, including insurance shopping and repair/maintenance adjacency. Validates the "ownership decision tool" direction behind the claim calculator, but is US-focused and not the Thai bilingual motor-insurance bundle.
 - Lemonade / Maya: proves conversational insurance can work, but is carrier-led and not neutral Thai motor comparison.
@@ -1142,7 +1142,7 @@ Final product conclusion:
 
 - The idea is differentiated as a bundle, not because every ingredient is novel.
 - The safest public wording is not "first" or "only"; use language like "unlike typical quote forms" and "helps you understand and control your price before speaking to an advisor."
-- The moat is not generic AI. The moat is execution quality, Thai bilingual localisation, the pricing-band data pipeline, Indara trust assets, and useful decision tools that keep helping after the first quote.
+- The moat is not generic AI. The moat is execution quality, Thai bilingual localisation, the pricing-band data pipeline, TNI trust assets, and useful decision tools that keep helping after the first quote.
 - Build order should remain disciplined: section 27 core flow first, then section 28.1 claim-decision calculator, then section 28.2 EV-aware branch. Do not overload the first MVP with the later policy-wallet / telematics ideas.
 
 Primary URLs referenced in Codex scan:
@@ -1282,7 +1282,7 @@ It is a real model change: confidence stops being a single enum off the band loo
 
 Each precision step nudges the product from "indicative range" toward "looks like
 a bindable quote" (section 14). Sum insured and named-driver change the number the
-most, so they carry the most "did Indara quote me this?" risk. Keep the
+most, so they carry the most "did TNI quote me this?" risk. Keep the
 advisor-confirms gate and indicative framing prominent as these are added.
 
 ### 30.8 Sources

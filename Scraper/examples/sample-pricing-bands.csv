@@ -1,5 +1,5 @@
 band_key,vehicle_group,year_band,province_region,coverage_type,driver_age_band,repair_pref,premium_min,premium_max,premium_median,sample_count,source_sites,confidence,manual_override,override_note
-toyota_vios|2020_2024|bangkok|type_1|25_35|garage,toyota_vios,2020_2024,bangkok,type_1,25_35,garage,13000,17000,15000,3,manual_seed,medium,true,Starter demo band until Indara-approved pricing data is loaded
-toyota_vios|2020_2024|bangkok|type_2_plus|25_35|garage,toyota_vios,2020_2024,bangkok,type_2_plus,25_35,garage,8500,11500,10000,3,manual_seed,medium,true,Starter demo band until Indara-approved pricing data is loaded
-honda_city|2020_2024|bangkok|type_1|25_35|garage,honda_city,2020_2024,bangkok,type_1,25_35,garage,13500,18000,15800,3,manual_seed,medium,true,Starter demo band until Indara-approved pricing data is loaded
-isuzu_dmax|2020_2024|bangkok|type_1|25_35|garage,isuzu_dmax,2020_2024,bangkok,type_1,25_35,garage,15500,22000,18500,3,manual_seed,medium,true,Starter demo band until Indara-approved pricing data is loaded
+toyota_vios|2020_2024|bangkok|type_1|25_35|garage,toyota_vios,2020_2024,bangkok,type_1,25_35,garage,13000,17000,15000,3,manual_seed,medium,true,Starter demo band until TNI-approved pricing data is loaded
+toyota_vios|2020_2024|bangkok|type_2_plus|25_35|garage,toyota_vios,2020_2024,bangkok,type_2_plus,25_35,garage,8500,11500,10000,3,manual_seed,medium,true,Starter demo band until TNI-approved pricing data is loaded
+honda_city|2020_2024|bangkok|type_1|25_35|garage,honda_city,2020_2024,bangkok,type_1,25_35,garage,13500,18000,15800,3,manual_seed,medium,true,Starter demo band until TNI-approved pricing data is loaded
+isuzu_dmax|2020_2024|bangkok|type_1|25_35|garage,isuzu_dmax,2020_2024,bangkok,type_1,25_35,garage,15500,22000,18500,3,manual_seed,medium,true,Starter demo band until TNI-approved pricing data is loaded

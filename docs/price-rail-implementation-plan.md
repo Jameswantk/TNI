@@ -1,4 +1,4 @@
-# Implementation plan — Indara price rail, remaining §30 work
+# Implementation plan — TNI price rail, remaining §30 work
 
 > Status: the core two-group rail is **already implemented and live on `main`**
 > (commit `4d65ec3`). This plan covers the **remaining and refinement work** only.

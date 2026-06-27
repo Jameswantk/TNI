@@ -1,4 +1,4 @@
-﻿import { program } from "commander";
+import { program } from "commander";
 import { buildPricingBands } from "./bander.js";
 import { liveQuoteFlowAdapters, publicPageAdapters } from "./adapters/index.js";
 import { crawlVehicleCatalog } from "./catalog/catalogCrawler.js";
@@ -15,8 +15,8 @@ import { createRunId } from "./utils/ids.js";
 const store = new FileStore();
 
 program
-  .name("indara-price-scraper")
-  .description("Offline pricing-band worker for the Indara AI insurance advisor.")
+  .name("tni-price-scraper")
+  .description("Offline pricing-band worker for the TNI AI insurance advisor.")
   .version("0.1.0");
 
 program.command("validate").description("Validate local scraper storage.").action(async () => {

@@ -10,7 +10,7 @@ export class RoojaiPublicPageAdapter implements SiteAdapter {
   async collect(_runId: string): Promise<RawQuote[]> {
     const response = await fetch(URL, {
       headers: {
-        "user-agent": "IndaraAI/0.1 public-page calibration contact=Indara",
+        "user-agent": "TNI/0.1 public-page calibration contact=TNI",
       },
     });
     if (!response.ok) {

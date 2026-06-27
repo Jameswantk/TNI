@@ -2,7 +2,7 @@ import type { AdvisorReadItem, Answers, PriceControls, Quote } from '../types'
 import { assessConfidence, headlineQuote } from './pricing'
 
 // ============================================================================
-// "INDARA'S READ" — thin deterministic advisor layer (project memory §4, §14)
+// "TNI'S READ" — thin deterministic advisor layer (project memory §4, §14)
 // ----------------------------------------------------------------------------
 // Interprets the existing quote/controls/confidence into up to three advisor
 // rows: the best next saving, the biggest open assumption, and the most relevant

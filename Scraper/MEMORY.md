@@ -2,7 +2,7 @@
 
 Last updated: 2026-06-19
 
-This file is for future LLMs and developers working specifically on the Indara price scraper.
+This file is for future LLMs and developers working specifically on the TNI price scraper.
 
 ## Implementation Update — 2026-06-19
 
@@ -37,7 +37,7 @@ Important current limitations:
 - The scraper core now models the right factors, but the pricing database becomes comprehensive only after approved broader runs populate the grid and missing coverage tiers.
 - Roojai is the verified premium-producing live source. MrKumka is wired into the safer annual/observed extraction contract, but selector QA is still needed before it is a reliable second source.
 - Coverage types beyond Type 1 are still mostly missing in generated live data. Use `report:coverage` to track gaps.
-- Do not treat competitor-sampled prices as exact Indara offers. They remain indicative inputs for offline pricing bands.
+- Do not treat competitor-sampled prices as exact TNI offers. They remain indicative inputs for offline pricing bands.
 - Do not run live scraping during customer chat. The chat must read `pricing_bands.json` or the future production DB.
 
 ## Current Status
@@ -68,7 +68,7 @@ The scraper exists to populate and refresh indicative bands offline.
 
 ## Legal / Compliance Boundary
 
-Browser-driven competitor quote-flow automation exists behind `ALLOW_LIVE_QUOTE_FORMS=true`. Run it only after Indara explicitly signs off on legal/ToS risk and operating limits.
+Browser-driven competitor quote-flow automation exists behind `ALLOW_LIVE_QUOTE_FORMS=true`. Run it only after TNI explicitly signs off on legal/ToS risk and operating limits.
 
 The scraper must not:
 
@@ -78,7 +78,7 @@ The scraper must not:
 - Use login-only data.
 - Evade access controls.
 - Run high-volume requests.
-- Present competitor quotes as exact Indara prices.
+- Present competitor quotes as exact TNI prices.
 
 Safe authorized-testing support:
 
@@ -91,7 +91,7 @@ These settings are not a permission to bypass CAPTCHA, anti-bot systems, login w
 
 Allowed first-phase sources:
 
-- Manual CSV imports from Indara-approved price data.
+- Manual CSV imports from TNI-approved price data.
 - Public pages used for broad market calibration.
 - Future partner APIs.
 - Future insurer rate tables.
@@ -102,7 +102,7 @@ Allowed first-phase sources:
 
 Preferred data-source order:
 
-1. Indara historical quotes.
+1. TNI historical quotes.
 2. Insurer rate tables.
 3. Partner APIs or approved data-sharing.
 4. Manual admin imports.
@@ -168,4 +168,4 @@ npm run validate
 
 ## Do Not Forget
 
-The goal is broad indicative pricing ranges for the Indara AI advisor. The goal is not to clone Roojai or MrKumka, mirror their prices, or sell competitor-derived quotes as exact Indara offers.
+The goal is broad indicative pricing ranges for the TNI AI advisor. The goal is not to clone Roojai or MrKumka, mirror their prices, or sell competitor-derived quotes as exact TNI offers.

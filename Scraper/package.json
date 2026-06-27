@@ -1,9 +1,9 @@
 {
-  "name": "indara-price-scraper",
+  "name": "tni-price-scraper",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Offline pricing-band worker for Indara AI insurance advisor.",
+  "description": "Offline pricing-band worker for TNI AI insurance advisor.",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "start": "tsx src/index.ts",
