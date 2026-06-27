@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Indara Advisor — design mockup (A+C hybrid)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Noto+Sans+Thai:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3/dist/tabler-icons.min.css" />
+<style>
+  :root {
+    --navy:#0c447c; --blue:#185fa5; --blue-50:#e6f1fb; --green:#1d9e75;
+    --page:#f4f6f9; --surface:#ffffff; --border:rgba(18,33,51,0.12); --border-2:rgba(18,33,51,0.24);
+    --text:#1a2433; --text-2:#5a6473; --text-3:#909aa8;
+    --radius:8px; --radius-lg:12px;
+    --success-bg:#e1f5ee; --success-tx:#0f6e56; --danger-tx:#a32d2d;
+    --info-bg:#e6f1fb; --info-tx:#0c447c; --info-border:#378add;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--page); color:var(--text);
+    font-family:'Inter','Noto Sans Thai',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  .wrap { max-width:980px; margin:0 auto; padding:28px 20px 60px; }
+  h1 { font-size:20px; font-weight:500; margin:0 0 4px; }
+  .sub { font-size:13px; color:var(--text-2); margin:0 0 24px; }
+  .caption { font-size:12px; color:var(--text-2); margin:28px 0 8px; }
+  .caption strong { color:var(--text); }
+  .frame { border:1px solid var(--border-2); border-radius:var(--radius-lg); overflow:hidden; background:var(--surface); }
+  .chrome { background:var(--page); padding:7px 11px; display:flex; align-items:center; gap:8px; border-bottom:1px solid var(--border); }
+  .dots { display:flex; gap:4px; }
+  .dot { width:9px; height:9px; border-radius:50%; }
+  .url { flex:1; background:var(--surface); border:1px solid var(--border); border-radius:999px; font-size:11px; color:var(--text-3); padding:3px 11px; }
+  .appbar { background:var(--navy); color:#fff; padding:10px 16px; display:flex; align-items:center; gap:10px; }
+  .mark { width:26px; height:26px; border-radius:50%; background:var(--blue); display:flex; align-items:center; justify-content:center; font-size:14px; }
+  .lang { font-size:11px; border:1px solid rgba(255,255,255,0.4); border-radius:999px; padding:3px 10px; }
+  .stepper { display:flex; align-items:center; gap:7px; padding:10px 16px; border-bottom:1px solid var(--border); font-size:12px; flex-wrap:wrap; }
+  .step { display:flex; align-items:center; gap:5px; }
+  .bub { width:18px; height:18px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:11px; }
+  .done { color:var(--success-tx); } .done .bub { background:var(--success-bg); }
+  .cur { font-weight:500; color:var(--blue); } .cur .bub { background:var(--blue); color:#fff; }
+  .next { color:var(--text-3); } .next .bub { border:1px solid var(--border-2); }
+  .rule { flex:1; height:1px; background:var(--border); min-width:14px; }
+  .panes { display:grid; grid-template-columns:1fr 1fr; }
+  .chat { border-right:1px solid var(--border); padding:14px; display:flex; flex-direction:column; gap:8px; font-size:12px; min-height:340px; }
+  .a { background:var(--page); border-radius:11px 11px 11px 3px; padding:8px 11px; max-width:88%; }
+  .u { background:var(--blue); color:#fff; border-radius:11px 11px 3px 11px; padding:8px 11px; margin-left:auto; }
+  .chips { display:flex; flex-wrap:wrap; gap:6px; }
+  .chip { font-size:12px; border:1px solid var(--border-2); border-radius:999px; padding:5px 12px; }
+  .chip.sel { background:var(--blue); color:#fff; border-color:var(--blue); }
+  .input { margin-top:auto; display:flex; gap:8px; align-items:center; border:1px solid var(--border); border-radius:999px; padding:7px 13px; color:var(--text-3); }
+  .rail { padding:14px; display:flex; flex-direction:column; gap:11px; background:var(--page); }
+  .card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:12px 14px; }
+  .price { font-size:27px; font-weight:500; color:var(--navy); margin:3px 0; }
+  .pill { font-size:11px; padding:2px 9px; border-radius:999px; }
+  .pill.ok { background:var(--success-bg); color:var(--success-tx); }
+  .rowf { display:flex; justify-content:space-between; font-size:12px; }
+  .ttl { font-size:12px; font-weight:500; margin-bottom:7px; }
+  .ncb { border:2px solid var(--info-border); border-radius:var(--radius); padding:8px 10px; margin-bottom:7px; }
+  .mini { font-size:11px; border:1px solid var(--border-2); border-radius:999px; padding:2px 9px; }
+  .mini.sel { background:var(--blue); color:#fff; border-color:var(--blue); }
+  .save { color:var(--success-tx); } .load { color:var(--danger-tx); }
+  .cta { font-size:12px; padding:9px; border-radius:var(--radius); border:none; background:var(--blue); color:#fff; cursor:pointer; }
+  .phone { max-width:300px; margin:0 auto; border:1px solid var(--border-2); border-radius:18px; overflow:hidden; background:var(--surface); }
+  .stick { position:sticky; bottom:0; background:var(--surface); border-top:1px solid var(--border-2); padding:10px 12px; display:flex; align-items:center; justify-content:space-between; }
+  @media (max-width:760px){ .panes{ grid-template-columns:1fr; } .chat{ border-right:none; border-bottom:1px solid var(--border); } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Indara Advisor — design mockup</h1>
+  <p class="sub">Chosen direction: <strong>A + C hybrid</strong> — conversational advisor (A) with a guided stepper and a persistent live-price rail (C). Responsive web app; desktop two-pane shown first, narrow-width reflow below.</p>
+
+  <p class="caption"><strong>Desktop</strong> — two-pane: chat advisor (left) · stepper (top) · live price rail (right)</p>
+  <div class="frame">
+    <div class="chrome">
+      <span class="dots"><span class="dot" style="background:#e24b4a"></span><span class="dot" style="background:#ef9f27"></span><span class="dot" style="background:#1d9e75"></span></span>
+      <span class="url"><i class="ti ti-lock"></i> indara.co.th/advisor</span>
+    </div>
+    <div class="appbar">
+      <span class="mark"><i class="ti ti-shield-check"></i></span>
+      <span style="flex:1; font-size:14px; font-weight:500;">Indara Advisor</span>
+      <span class="lang">TH / <strong>EN</strong></span>
+    </div>
+    <div class="stepper">
+      <span class="step done"><span class="bub"><i class="ti ti-check"></i></span> Car</span>
+      <span class="rule"></span>
+      <span class="step done"><span class="bub"><i class="ti ti-check"></i></span> Cover</span>
+      <span class="rule"></span>
+      <span class="step cur"><span class="bub">3</span> Driver</span>
+      <span class="rule"></span>
+      <span class="step next"><span class="bub">4</span> Tune price</span>
+    </div>
+    <div class="panes">
+      <div class="chat">
+        <div class="a">Hi 👋 I'll find your price in 3 quick taps — no phone number needed. First, your car?</div>
+        <div class="u" style="max-width:72%">Toyota Yaris 2021</div>
+        <div class="a">Got it. What matters most to you?</div>
+        <div class="u" style="max-width:55%">Balanced value</div>
+        <div class="a">Last one — the main driver's age?</div>
+        <div class="chips">
+          <span class="chip">Under 25</span><span class="chip">25–35</span><span class="chip sel">36–50</span><span class="chip">50+</span>
+        </div>
+        <div class="input"><span style="flex:1">Or type your answer…</span><i class="ti ti-send" style="color:var(--blue)"></i></div>
+      </div>
+      <div class="rail">
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-size:11px; color:var(--text-2);">Live estimate · Balanced value</span>
+            <span style="font-size:10px; color:var(--success-tx);"><i class="ti ti-bolt"></i> updates live</span>
+          </div>
+          <div class="price">฿14,200–16,800 <span style="font-size:12px; color:var(--text-2);">/yr</span></div>
+          <span class="pill ok"><i class="ti ti-circle-check"></i> High confidence</span>
+        </div>
+        <div class="card">
+          <div class="ttl"><i class="ti ti-info-circle" style="color:var(--info-tx)"></i> Why this price?</div>
+          <div style="display:flex; flex-direction:column; gap:5px;">
+            <div class="rowf"><span style="color:var(--text-2)">Base · Yaris 2021, Type 2+</span><span>฿18,500</span></div>
+            <div class="rowf"><span>Driver age 36–50</span><span class="save">−15%</span></div>
+            <div class="rowf" style="border-top:1px solid var(--border); padding-top:5px; font-weight:500;"><span>Estimate</span><span>฿14,200–16,800</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span class="ttl" style="margin:0"><i class="ti ti-adjustments"></i> Lower my price</span>
+            <span style="font-size:13px; font-weight:500;" class="save">→ ฿9,900–11,600</span>
+          </div>
+          <div class="ncb">
+            <div class="rowf" style="align-items:center"><span style="font-weight:500"><i class="ti ti-shield-check"></i> Claim-free years</span><span class="save" style="font-weight:500">−40%</span></div>
+            <div style="display:flex; gap:5px; margin-top:7px;">
+              <span class="mini">None</span><span class="mini">1</span><span class="mini">2</span><span class="mini sel">3</span><span class="mini">4+</span>
+            </div>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:6px;">
+            <span class="mini"><i class="ti ti-camera"></i> Dashcam −7%</span>
+            <span class="mini"><i class="ti ti-tool"></i> Garage repair −</span>
+            <span class="mini"><i class="ti ti-cash"></i> Higher excess −</span>
+            <span class="mini" style="color:var(--text-2)"><i class="ti ti-map-pin"></i> Bangkok +8%</span>
+          </div>
+        </div>
+        <button class="cta">See my 3 plans →</button>
+      </div>
+    </div>
+  </div>
+
+  <p class="caption"><strong>Narrow / mobile reflow</strong> — chat stacks on top; the price rail collapses to a sticky bottom bar so the live number stays visible</p>
+  <div class="phone">
+    <div class="appbar" style="padding:9px 13px;">
+      <span class="mark" style="width:22px;height:22px;font-size:12px;"><i class="ti ti-shield-check"></i></span>
+      <span style="flex:1; font-size:13px; font-weight:500;">Indara Advisor</span>
+      <span class="lang" style="padding:2px 8px;">EN</span>
+    </div>
+    <div class="stepper" style="padding:8px 12px; font-size:11px;">
+      <span class="step done"><span class="bub" style="width:15px;height:15px;"><i class="ti ti-check"></i></span></span>
+      <span class="rule"></span>
+      <span class="step done"><span class="bub" style="width:15px;height:15px;"><i class="ti ti-check"></i></span></span>
+      <span class="rule"></span>
+      <span class="step cur"><span class="bub" style="width:15px;height:15px;">3</span> Driver</span>
+      <span class="rule"></span>
+      <span class="step next"><span class="bub" style="width:15px;height:15px;">4</span> Tune</span>
+    </div>
+    <div style="padding:12px; display:flex; flex-direction:column; gap:7px; font-size:12px;">
+      <div class="a">Last one — the main driver's age?</div>
+      <div class="chips">
+        <span class="chip" style="padding:4px 10px;">Under 25</span><span class="chip" style="padding:4px 10px;">25–35</span><span class="chip sel" style="padding:4px 10px;">36–50</span><span class="chip" style="padding:4px 10px;">50+</span>
+      </div>
+    </div>
+    <div class="stick">
+      <div>
+        <div style="font-size:10px; color:var(--text-2);">Live estimate</div>
+        <div style="font-size:17px; font-weight:500; color:var(--navy);">฿14,200–16,800</div>
+      </div>
+      <button class="cta" style="padding:7px 12px;">Why · Lower <i class="ti ti-chevron-up"></i></button>
+    </div>
+  </div>
+
+  <p class="sub" style="margin-top:28px; color:var(--text-3);">Static design artifact. Colours and type mirror <code>indara-advisor/src/styles.css</code>. Not wired to the quote engine; numbers are illustrative placeholders.</p>
+</div>
+</body>
+</html>

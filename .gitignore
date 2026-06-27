@@ -1,0 +1,7 @@
+node_modules/
+dist/
+/Scraper/data/
+*.log
+
+# Local Netlify folder
+.netlify

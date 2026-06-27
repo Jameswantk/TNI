@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Indara price rail v2 — §30 mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+Thai:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3/dist/tabler-icons.min.css" />
+<style>
+  :root{
+    --navy:#0c447c;--blue:#185fa5;--blue-100:#b5d4f4;--blue-50:#e6f1fb;--green:#1d9e75;
+    --page:#f4f6f9;--surface:#ffffff;--border:rgba(18,33,51,0.12);--border-2:rgba(18,33,51,0.24);
+    --text:#1a2433;--text-2:#5a6473;--text-3:#909aa8;--radius:8px;--radius-lg:12px;
+    --amber-bg:#faeeda;--amber-tx:#854f0b;--success-bg:#e1f5ee;--success-tx:#0f6e56;--danger-tx:#a32d2d;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--page);color:var(--text);font-family:'Inter','Noto Sans Thai',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1000px;margin:0 auto;padding:28px 20px 64px}
+  h1{font-size:20px;font-weight:600;margin:0 0 4px}
+  .sub{font-size:13px;color:var(--text-2);margin:0 0 8px;line-height:1.55}
+  .cap{font-size:12px;color:var(--text-2);margin:30px 0 10px;font-weight:500}
+  .cap b{color:var(--text)}
+  .panel{background:var(--page);border:1px solid var(--border-2);border-radius:var(--radius-lg);padding:16px}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px}
+  .hd{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600;margin-bottom:10px}
+  .hint{font-size:11px;color:var(--text-3);font-weight:400}
+  .done{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px}
+  .done .v{color:var(--text-2)}
+  .edit{font-size:11px;color:var(--blue);background:none;border:none;cursor:pointer}
+  .chip{font-size:12px;padding:5px 11px;border-radius:999px;border:1px solid var(--border-2);background:var(--surface);color:var(--text-2);display:inline-block}
+  .chip.sel{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .row{display:flex;gap:6px;flex-wrap:wrap}
+  .warn{font-size:11px;color:var(--amber-tx);margin:8px 0 0;display:flex;gap:5px}
+  .more{width:100%;margin-top:12px;background:var(--page);border:1px solid var(--border);border-radius:var(--radius);padding:7px;font-size:12px;color:var(--text-2);cursor:pointer}
+  .note{font-size:12px;color:var(--text-2);margin:12px 0 0;text-align:center;line-height:1.5}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .phone{max-width:300px;margin:0 auto;border:1px solid var(--border-2);border-radius:18px;overflow:hidden;background:var(--surface)}
+  .pbar{background:var(--navy);color:#fff;padding:9px 13px;display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500}
+  .pstep{display:flex;align-items:center;gap:5px;padding:8px 13px;border-bottom:1px solid var(--border);font-size:11px;color:var(--text-3)}
+  .pbody{padding:12px;display:flex;flex-direction:column;gap:9px;background:var(--page)}
+  .pcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:11px 12px}
+  .grp{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:500}
+  .stick{display:flex;align-items:center;justify-content:space-between;background:var(--surface);border-top:1px solid var(--border-2);padding:10px 13px}
+  .cta{font-size:11.5px;padding:7px 11px;border-radius:var(--radius);border:none;background:var(--blue);color:#fff;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+  .pill{font-size:11px;font-weight:500;padding:2px 8px;border-radius:999px}
+  .pill.med{background:var(--amber-bg);color:var(--amber-tx)}
+  .advisor{display:flex;gap:8px;align-items:flex-start;background:var(--blue-50);border-radius:var(--radius);padding:9px 10px}
+  .advisor i{color:var(--blue);font-size:16px;flex-shrink:0}
+  .advisor span{font-size:12px;color:var(--navy);line-height:1.4}
+  .plan{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px;position:relative}
+  .plan.feat{border:2px solid var(--blue)}
+  .badge{position:absolute;top:-10px;left:14px;background:var(--blue-50);color:var(--navy);font-size:11px;padding:3px 10px;border-radius:var(--radius)}
+  .pname{font-size:14px;font-weight:600}
+  .pmeta{font-size:12px;color:var(--text-2)}
+  .pprice{font-size:18px;font-weight:600;color:var(--navy);margin:6px 0 2px}
+  .pins{font-size:12px;color:var(--text-2);margin-bottom:8px}
+  .bchip{font-size:11px;background:var(--blue-50);color:var(--navy);border-radius:999px;padding:3px 9px;display:inline-block;margin:0 4px 5px 0}
+  .pbtn{width:100%;margin-top:9px;font-size:13px;font-weight:500;padding:9px;border-radius:var(--radius);border:none;background:var(--navy);color:#fff;cursor:pointer}
+  .pbtn.ghost{background:transparent;border:1px solid var(--border-2);color:var(--text)}
+  .foot{font-size:11.5px;color:var(--text-3);margin-top:36px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Indara price rail v2 — section 30 mockups</h1>
+  <p class="sub">Visual targets for <code>docs/price-rail-implementation-plan.md</code> (P1 items). The two-group rail is already implemented (commit 4d65ec3); these show the <b>remaining</b> details: a real-baht insured value, adaptive disclosure, the mobile sticky bar, and the recommendation-card additions. Colours/type mirror <code>indara-advisor/src/styles.css</code>; numbers are illustrative.</p>
+
+  <p class="cap"><b>P1 #1 + #2 — "Sharpen this estimate":</b> real baht insured value + adaptive disclosure (confirmed controls collapse to one-line summaries; still-assumed ones stay open)</p>
+  <div class="panel">
+    <div class="card" style="max-width:440px;margin:0 auto">
+      <div class="hd"><span><i class="ti ti-adjustments-alt"></i> Sharpen this estimate</span><span class="hint">raises confidence</span></div>
+      <div class="done"><span><i class="ti ti-circle-check" style="color:var(--success-tx)"></i> Area <span class="v">· Bangkok</span></span><button class="edit">Edit</button></div>
+      <div class="done"><span><i class="ti ti-circle-check" style="color:var(--success-tx)"></i> Vehicle use <span class="v">· Private only</span></span><button class="edit">Edit</button></div>
+      <div style="margin-top:12px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px"><span style="font-size:12px;font-weight:500"><i class="ti ti-shield-half"></i> Insured value</span><span style="font-size:13px;font-weight:600;color:var(--blue)">฿620,000</span></div>
+        <div class="row"><span class="chip">Lower · ฿560k</span><span class="chip sel">Balanced · ฿620k</span><span class="chip">Higher · ฿680k</span></div>
+        <p class="warn"><i class="ti ti-alert-triangle"></i> A lower insured value may reduce your payout if the car is written off.</p>
+      </div>
+      <button class="more">More accuracy — at-fault claims, trim <i class="ti ti-chevron-down"></i></button>
+    </div>
+    <p class="note">Confirmed controls collapse to summaries with Edit; the still-assumed insured value stays open and now shows a real baht figure (lower/balanced/higher = market value ×0.9 / ×1.0 / ×1.1).</p>
+  </div>
+
+  <p class="cap"><b>P1 #3 — Mobile reflow:</b> two groups stack; the live number pins to a sticky bottom bar. Right: business/delivery withdraws the number.</p>
+  <div class="panel">
+    <div class="grid2">
+      <div>
+        <p class="note" style="margin:0 0 10px">Normal — live number pinned</p>
+        <div class="phone">
+          <div class="pbar"><i class="ti ti-shield-check"></i><span style="flex:1">Indara Advisor</span><span style="font-size:11px;opacity:.85">EN</span></div>
+          <div class="pstep"><i class="ti ti-check" style="color:var(--success-tx)"></i> Car <i class="ti ti-check" style="color:var(--success-tx)"></i> Cover <i class="ti ti-check" style="color:var(--success-tx)"></i> Driver · <span style="color:var(--blue)">Tune</span></div>
+          <div class="pbody">
+            <div class="pcard">
+              <div style="font-size:11px;color:var(--text-2)">Live estimate · Type 2+</div>
+              <div style="font-size:20px;font-weight:600;color:var(--blue);margin:3px 0 6px">฿8,500 – 11,800</div>
+              <span class="pill med">Medium confidence</span>
+            </div>
+            <div class="pcard grp"><span><i class="ti ti-arrow-down-circle"></i> Lower my price</span><i class="ti ti-chevron-down" style="color:var(--text-3)"></i></div>
+            <div class="pcard grp"><span><i class="ti ti-adjustments-alt"></i> Sharpen this estimate</span><i class="ti ti-chevron-down" style="color:var(--text-3)"></i></div>
+          </div>
+          <div class="stick"><div><div style="font-size:10px;color:var(--text-2)">Live estimate</div><div style="font-size:16px;font-weight:600;color:var(--navy)">฿8,500–11,800</div></div><button class="cta">Why · Sharpen · Lower <i class="ti ti-chevron-up"></i></button></div>
+        </div>
+      </div>
+      <div>
+        <p class="note" style="margin:0 0 10px">Business / delivery — number withdrawn</p>
+        <div class="phone">
+          <div class="pbar"><i class="ti ti-shield-check"></i><span style="flex:1">Indara Advisor</span><span style="font-size:11px;opacity:.85">EN</span></div>
+          <div class="pstep"><i class="ti ti-check" style="color:var(--success-tx)"></i> Car <i class="ti ti-check" style="color:var(--success-tx)"></i> Cover <i class="ti ti-check" style="color:var(--success-tx)"></i> Driver · <span style="color:var(--blue)">Tune</span></div>
+          <div class="pbody">
+            <div class="pcard">
+              <div style="font-size:11px;color:var(--text-2)">Live estimate · Type 2+</div>
+              <div class="advisor" style="margin:6px 0"><i class="ti ti-user-shield"></i><span>For business or delivery use, an advisor will confirm the price and cover.</span></div>
+              <span class="pill med">Rough estimate</span>
+            </div>
+            <div class="pcard grp"><span><i class="ti ti-adjustments-alt"></i> Sharpen — use: business</span><i class="ti ti-chevron-up" style="color:var(--text-3)"></i></div>
+          </div>
+          <div class="stick"><div><div style="font-size:10px;color:var(--text-2)">Live estimate</div><div style="font-size:13px;font-weight:600;color:var(--navy)">Advisor will confirm</div></div><button class="cta">Talk to advisor <i class="ti ti-arrow-right"></i></button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="cap"><b>P1 #4 — Recommendation cards:</b> an estimated-insured-value line on every card; commercial use replaces the price with an advisor-confirm block.</p>
+  <div class="panel">
+    <div class="grid2">
+      <div class="plan feat">
+        <span class="badge">Recommended</span>
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><span class="pname">Best Value</span><span class="pmeta">Type 2+ · Garage</span></div>
+        <div class="pprice">฿8,500 – 11,800 <span style="font-size:11px;color:var(--text-3)">/ year</span></div>
+        <div class="pins"><i class="ti ti-shield-half"></i> Estimated insured value ฿620,000</div>
+        <div><span class="bchip"><i class="ti ti-check"></i> Theft / fire</span><span class="bchip"><i class="ti ti-check"></i> Third-party</span><span class="bchip"><i class="ti ti-check"></i> Collision (known)</span></div>
+        <button class="pbtn">I'm interested</button>
+      </div>
+      <div class="plan">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><span class="pname">Best Value</span><span class="pmeta">Type 2+ · Garage</span></div>
+        <div class="advisor" style="margin:7px 0 2px"><i class="ti ti-user-shield"></i><span>An advisor will confirm the price for business / delivery use.</span></div>
+        <div class="pins" style="margin-top:8px"><i class="ti ti-shield-half"></i> Estimated insured value ฿620,000</div>
+        <div><span class="bchip" style="background:var(--amber-bg);color:var(--amber-tx)"><i class="ti ti-alert-triangle"></i> Commercial use — eligibility check</span></div>
+        <button class="pbtn ghost">Talk to an advisor</button>
+      </div>
+    </div>
+  </div>
+
+  <p class="foot">Static design artifact. P2 controls (trim, EV battery/charger) reuse the existing chip/toggle patterns in <code>PriceRail.tsx</code> and need no separate mockup. See <code>docs/price-rail-implementation-plan.md</code> and memory section 30.</p>
+</div>
+</body>
+</html>

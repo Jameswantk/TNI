@@ -1,0 +1,33 @@
+{
+  "name": "indara-price-scraper",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Offline pricing-band worker for Indara AI insurance advisor.",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "tsx src/index.ts",
+    "validate": "tsx src/index.ts validate",
+    "scrape:public": "tsx src/index.ts scrape-public",
+    "scrape:live": "tsx src/index.ts scrape-live",
+    "auth:save": "tsx src/index.ts save-auth-state",
+    "band": "tsx src/index.ts band",
+    "catalog": "tsx src/index.ts catalog",
+    "grid": "tsx src/index.ts grid",
+    "report:coverage": "tsx src/index.ts report:coverage",
+    "plan:incremental": "tsx src/index.ts plan:incremental",
+    "test:unit": "tsx src/index.ts test:unit",
+    "import:sample": "tsx src/index.ts import-csv examples/sample-pricing-bands.csv",
+    "smoke": "tsx src/index.ts import-csv examples/sample-pricing-bands.csv && tsx src/index.ts validate && tsx src/index.ts band"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "commander": "^12.1.0",
+    "playwright": "^1.61.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
