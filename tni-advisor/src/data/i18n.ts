@@ -91,7 +91,7 @@ const en: Dict = {
   'est.because': 'Because {reasons} are still assumed — sharpen below.',
 
   // TNI's read (advisor layer)
-  'read.title': 'Thanachart Insurance read',
+  'read.title': "TNI's read",
   'read.label.saving': 'Best next saving',
   'read.label.assumption': 'Biggest assumption',
   'read.label.warning': 'Watch out',
@@ -506,7 +506,7 @@ const th: Dict = {
   'est.because': 'เพราะยังสมมติ {reasons} อยู่ — ปรับด้านล่างเพื่อความแม่นยำ',
 
   // TNI's read (advisor layer)
-  'read.title': 'ธนชาตวิเคราะห์ให้',
+  'read.title': 'TNI วิเคราะห์ให้',
   'read.label.saving': 'ลดราคาได้ต่อไป',
   'read.label.assumption': 'ข้อสมมติที่สำคัญสุด',
   'read.label.warning': 'ข้อควรระวัง',
