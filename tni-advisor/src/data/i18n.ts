@@ -146,7 +146,7 @@ const en: Dict = {
 
   'rail.sharpen': 'Sharpen this estimate',
   'rail.sharpenHint': 'raises confidence',
-  'rail.bestCase': 'best case if all savings apply',
+  'rail.bestCase': 'Best case if all savings apply',
   'rail.moreSave': 'More ways to save',
   'rail.moreAcc': 'More accuracy',
   'rail.fewer': 'Show less',
