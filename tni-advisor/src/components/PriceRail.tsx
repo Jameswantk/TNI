@@ -58,7 +58,6 @@ export function PriceRail({ t, answers, controls, quote, lastUpdated, onControls
     window.setTimeout(() => el.classList.remove('pulse'), 1100)
   }
   function onReadAction(target: AdvisorTarget) {
-    if (target === 'plans') return onSeePlans()
     if (target === 'sharpen') {
       // Pulse the first still-open accuracy control (the one the assumption is about).
       return pulseEl(sharpenRef.current?.querySelector('.prov-block, .ctrl-block') ?? sharpenRef.current)
@@ -151,19 +150,31 @@ export function PriceRail({ t, answers, controls, quote, lastUpdated, onControls
             <span>{t('est.advisorCommercial')}</span>
           </div>
         ) : quote.priced ? (
-          <p className="rail-price">
-            {baht(quote.min)} – {baht(quote.max)}
-            <span className="rail-per">{t('plan.perYear')}</span>
-          </p>
+          <>
+            <p className="rail-price">
+              <span className="rail-price-label">{t('rail.typical')}</span>
+              {baht(quote.median)}
+              <span className="rail-per">{t('plan.perYear')}</span>
+            </p>
+            <p className="rail-range">{t('rail.range')}: {baht(quote.min)} - {baht(quote.max)}</p>
+          </>
         ) : (
           <p className="rail-unpriced">{t('est.unpriced')}</p>
+        )}
+
+        {quote.priced && !conf.commercial && canFloor && (
+          <p className="rail-floor-note">
+            <span>{t('rail.lower')}</span>
+            <strong>{baht(quote.floorMin)}-{baht(quote.floorMax)}</strong>
+            <small>{t('rail.bestCase')}</small>
+          </p>
         )}
 
         <div className="conf-row">
           <span className={`est-conf ${confClass[conf.level]}`}>
             <i className="ti ti-circle-dot" aria-hidden="true" /> {t(confLabel[conf.level])}
           </span>
-          <button className="conf-toggle" onClick={() => setShowFlags(!showFlags)}>
+          <button className="conf-toggle" type="button" aria-expanded={showFlags} onClick={() => setShowFlags(!showFlags)}>
             {t('est.whatsAssumed')} <i className={`ti ti-chevron-${showFlags ? 'up' : 'down'}`} aria-hidden="true" />
           </button>
         </div>
@@ -188,7 +199,7 @@ export function PriceRail({ t, answers, controls, quote, lastUpdated, onControls
       {/* Why this price? — collapsible to keep the rail calm */}
       {quote.priced && !conf.commercial && (
         <div className="rail-card">
-          <button className="why-toggle" onClick={() => setShowWhy(!showWhy)}>
+          <button className="why-toggle" type="button" aria-expanded={showWhy} onClick={() => setShowWhy(!showWhy)}>
             <span><i className="ti ti-info-circle" aria-hidden="true" /> {t('est.why')}</span>
             <i className={`ti ti-chevron-${showWhy ? 'up' : 'down'}`} aria-hidden="true" />
           </button>
@@ -220,7 +231,7 @@ export function PriceRail({ t, answers, controls, quote, lastUpdated, onControls
       <div className="rail-card lower" ref={lowerRef}>
         <div className="rail-card-title between">
           <span><i className="ti ti-arrow-down-circle" aria-hidden="true" /> {t('rail.lower')}</span>
-          {canFloor && <span className="floor save">→ {baht(quote.floorMin)}–{baht(quote.floorMax)}</span>}
+          {canFloor && <span className="floor save">{t('rail.bestCase')}</span>}
         </div>
 
         <div
@@ -235,7 +246,7 @@ export function PriceRail({ t, answers, controls, quote, lastUpdated, onControls
           </div>
           <div className="mini-row wrap">
             {NCB_LEVELS.map((lvl) => (
-              <button key={lvl} className={`mini ${controls.ncb === lvl ? 'sel' : ''}`} onClick={() => onControls({ ncb: lvl })}>
+              <button key={lvl} type="button" className={`mini ${controls.ncb === lvl ? 'sel' : ''}`} aria-pressed={controls.ncb === lvl} onClick={() => onControls({ ncb: lvl })}>
                 {t('ncb.' + lvl)}
               </button>
             ))}
@@ -251,7 +262,7 @@ export function PriceRail({ t, answers, controls, quote, lastUpdated, onControls
           </div>
           <div className="mini-row wrap">
             {NAMED.map((n) => (
-              <button key={n} className={`mini ${controls.namedDriver === n ? 'sel' : ''}`} onClick={() => onControls({ namedDriver: n })}>
+              <button key={n} type="button" className={`mini ${controls.namedDriver === n ? 'sel' : ''}`} aria-pressed={controls.namedDriver === n} onClick={() => onControls({ namedDriver: n })}>
                 {t('named.' + n)}
               </button>
             ))}
@@ -264,7 +275,7 @@ export function PriceRail({ t, answers, controls, quote, lastUpdated, onControls
           )}
         </div>
 
-        <button className="more-toggle" onClick={() => setMoreSave(!moreSave)}>
+        <button className="more-toggle" type="button" aria-expanded={moreSave} onClick={() => setMoreSave(!moreSave)}>
           {moreSave ? t('rail.fewer') : t('rail.moreSave')} <i className={`ti ti-chevron-${moreSave ? 'up' : 'down'}`} aria-hidden="true" />
         </button>
         {moreSave && (
@@ -272,8 +283,8 @@ export function PriceRail({ t, answers, controls, quote, lastUpdated, onControls
             <div className="ctrl-row" data-ctrl="repair">
               <span className="ctrl-label"><i className="ti ti-tool" aria-hidden="true" /> {t('ctrl.repair')}</span>
               <div className="seg">
-                <button className={controls.repairPref === 'garage' ? 'sel' : ''} onClick={() => onControls({ repairPref: 'garage' })}>{t('opt.repair.garage')}</button>
-                <button className={controls.repairPref === 'dealer' ? 'sel' : ''} onClick={() => onControls({ repairPref: 'dealer' })}>{t('opt.repair.dealer')}</button>
+                <button type="button" className={controls.repairPref === 'garage' ? 'sel' : ''} aria-pressed={controls.repairPref === 'garage'} onClick={() => onControls({ repairPref: 'garage' })}>{t('opt.repair.garage')}</button>
+                <button type="button" className={controls.repairPref === 'dealer' ? 'sel' : ''} aria-pressed={controls.repairPref === 'dealer'} onClick={() => onControls({ repairPref: 'dealer' })}>{t('opt.repair.dealer')}</button>
               </div>
             </div>
             <div className="toggle-grid" data-ctrl="toggles">
@@ -284,7 +295,7 @@ export function PriceRail({ t, answers, controls, quote, lastUpdated, onControls
               <span className="ctrl-label"><i className="ti ti-road" aria-hidden="true" /> {t('ctrl.mileage')}</span>
               <div className="mini-row wrap" style={{ marginTop: 0 }}>
                 {MILEAGE.map((m) => (
-                  <button key={m} className={`mini ${controls.mileage === m ? 'sel' : ''}`} onClick={() => onControls({ mileage: m })}>{t('mile.' + m)}</button>
+                  <button key={m} type="button" className={`mini ${controls.mileage === m ? 'sel' : ''}`} aria-pressed={controls.mileage === m} onClick={() => onControls({ mileage: m })}>{t('mile.' + m)}</button>
                 ))}
               </div>
             </div>
@@ -307,10 +318,10 @@ export function PriceRail({ t, answers, controls, quote, lastUpdated, onControls
             </span>
             <div className="mini-row wrap">
               {PROVINCES.map((p) => (
-                <button key={p} className={`mini ${controls.province === p ? 'sel' : ''}`} onClick={() => onControls({ province: p })}>{t('opt.prov.' + p)}</button>
+                <button key={p} type="button" className={`mini ${controls.province === p ? 'sel' : ''}`} aria-pressed={controls.province === p} onClick={() => onControls({ province: p })}>{t('opt.prov.' + p)}</button>
               ))}
             </div>
-            {controls.province && <button className="inline-done" onClick={() => setAccuracy('area', false)}>{t('rail.done')}</button>}
+            {controls.province && <button className="inline-done" type="button" onClick={() => setAccuracy('area', false)}>{t('rail.done')}</button>}
           </div>
         ) : (
           <SummaryRow
@@ -329,13 +340,13 @@ export function PriceRail({ t, answers, controls, quote, lastUpdated, onControls
               {!controls.usage && <span className="prov-hint">{t('usage.assumed')}</span>}
             </div>
             <div className="mini-row wrap">
-              <button className={`mini ${controls.usage === 'private' ? 'sel' : ''}`} onClick={() => onControls({ usage: 'private' })}>{t('usage.private')}</button>
-              <button className={`mini ${controls.usage === 'commercial' ? 'sel' : ''}`} onClick={() => onControls({ usage: 'commercial' })}>{t('usage.commercial')}</button>
+              <button type="button" className={`mini ${controls.usage === 'private' ? 'sel' : ''}`} aria-pressed={controls.usage === 'private'} onClick={() => onControls({ usage: 'private' })}>{t('usage.private')}</button>
+              <button type="button" className={`mini ${controls.usage === 'commercial' ? 'sel' : ''}`} aria-pressed={controls.usage === 'commercial'} onClick={() => onControls({ usage: 'commercial' })}>{t('usage.commercial')}</button>
             </div>
             {controls.usage === 'commercial' && (
               <p className="ctrl-info"><i className="ti ti-info-circle" aria-hidden="true" /> {t('usage.advisor')}</p>
             )}
-            {controls.usage && <button className="inline-done" onClick={() => setAccuracy('usage', false)}>{t('rail.done')}</button>}
+            {controls.usage && <button className="inline-done" type="button" onClick={() => setAccuracy('usage', false)}>{t('rail.done')}</button>}
           </div>
         ) : (
           <SummaryRow
@@ -357,7 +368,9 @@ export function PriceRail({ t, answers, controls, quote, lastUpdated, onControls
               {SUM.map((s) => (
                 <button
                   key={s}
+                  type="button"
                   className={`mini ${controls.sumInsured === s || (!controls.sumInsured && s === 'balanced') ? 'sel' : ''}`}
+                  aria-pressed={controls.sumInsured === s || (!controls.sumInsured && s === 'balanced')}
                   onClick={() => onControls({ sumInsured: s })}
                 >
                   {t('sum.' + s)} · {insuredOptionValue(s)}
@@ -367,7 +380,7 @@ export function PriceRail({ t, answers, controls, quote, lastUpdated, onControls
             {controls.sumInsured === 'lower' && (
               <p className="ctrl-warn"><i className="ti ti-alert-triangle" aria-hidden="true" /> {t('sum.warn')}</p>
             )}
-            {controls.sumInsured && <button className="inline-done" onClick={() => setAccuracy('insured', false)}>{t('rail.done')}</button>}
+            {controls.sumInsured && <button className="inline-done" type="button" onClick={() => setAccuracy('insured', false)}>{t('rail.done')}</button>}
           </div>
         ) : (
           <SummaryRow
@@ -379,7 +392,7 @@ export function PriceRail({ t, answers, controls, quote, lastUpdated, onControls
           />
         )}
 
-        <button className="more-toggle" onClick={() => setMoreAcc(!moreAcc)}>
+        <button className="more-toggle" type="button" aria-expanded={moreAcc} onClick={() => setMoreAcc(!moreAcc)}>
           {moreAcc ? t('rail.fewer') : t('rail.moreAcc')} <i className={`ti ti-chevron-${moreAcc ? 'up' : 'down'}`} aria-hidden="true" />
         </button>
         {moreAcc && (
@@ -388,9 +401,9 @@ export function PriceRail({ t, answers, controls, quote, lastUpdated, onControls
               <span className="ctrl-label"><i className="ti ti-alert-octagon" aria-hidden="true" /> {t('ctrl.atFault')}</span>
               <div className="mini-row wrap" style={{ marginTop: 0 }}>
                 {(['none', '1', '2plus'] as AtFault[]).map((x) => (
-                  <button key={x} className={`mini ${controls.atFault === x ? 'sel' : ''}`} onClick={() => onControls({ atFault: x })}>{t('atf.' + x)}</button>
+                  <button key={x} type="button" className={`mini ${controls.atFault === x ? 'sel' : ''}`} aria-pressed={controls.atFault === x} onClick={() => onControls({ atFault: x })}>{t('atf.' + x)}</button>
                 ))}
-                <button className={`mini ${!controls.atFault ? 'sel' : ''}`} onClick={() => onControls({ atFault: undefined })}>{t('atf.unsure')}</button>
+                <button type="button" className={`mini ${!controls.atFault ? 'sel' : ''}`} aria-pressed={!controls.atFault} onClick={() => onControls({ atFault: undefined })}>{t('atf.unsure')}</button>
               </div>
             </div>
           </div>
@@ -399,7 +412,7 @@ export function PriceRail({ t, answers, controls, quote, lastUpdated, onControls
         <p className="trim-later"><i className="ti ti-engine" aria-hidden="true" /> {t('ctrl.trimLater')}</p>
       </div>
 
-      <button className="btn-primary btn-block see-plans" onClick={onSeePlans}>
+      <button className="btn-primary btn-block see-plans" type="button" onClick={onSeePlans}>
         {t('rail.seePlans')} <i className="ti ti-arrow-right" aria-hidden="true" />
       </button>
 
@@ -428,14 +441,14 @@ function SummaryRow({
       <span>
         <i className={`ti ti-${icon}`} aria-hidden="true" /> {label} <span className="summary-value">· {value}</span>
       </span>
-      <button onClick={onEdit}>{editLabel}</button>
+      <button type="button" onClick={onEdit}>{editLabel}</button>
     </div>
   )
 }
 
 function Toggle({ icon, label, on, onClick }: { icon: string; label: string; on: boolean; onClick: () => void }) {
   return (
-    <button className={`toggle ${on ? 'on' : ''}`} onClick={onClick} aria-pressed={on}>
+    <button className={`toggle ${on ? 'on' : ''}`} type="button" onClick={onClick} aria-pressed={on}>
       <i className={`ti ti-${icon}`} aria-hidden="true" /> {label}
       {on && <i className="ti ti-check toggle-check" aria-hidden="true" />}
     </button>

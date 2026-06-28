@@ -99,7 +99,7 @@ function biggestAssumption(a: Answers, c: PriceControls, quote: Quote): AdvisorR
 // 3. Watch out — the most likely regret point. Active user tradeoffs (lower
 //    insured, named-driver) rank above generic coverage-tier gaps.
 function coverageWarning(_a: Answers, c: PriceControls, quote: Quote): AdvisorReadItem | null {
-  const warn = (bodyKey: string, target: AdvisorReadItem['target'], actionKey: string): AdvisorReadItem => ({
+  const warn = (bodyKey: string, target?: AdvisorReadItem['target'], actionKey?: string): AdvisorReadItem => ({
     kind: 'warning',
     icon: 'alert-triangle',
     labelKey: 'read.label.warning',
@@ -114,9 +114,9 @@ function coverageWarning(_a: Answers, c: PriceControls, quote: Quote): AdvisorRe
     const warnKey = c.namedDriver === 'any30' ? 'read.warn.any30' : c.namedDriver === 'any25' ? 'read.warn.any25' : 'read.warn.named'
     return warn(warnKey, 'named', 'read.action.adjust')
   }
-  if (quote.coverage === 'type_3_plus') return warn('read.warn.type3plus', 'plans', 'read.action.seePlans')
-  if (quote.coverage === 'type_2_plus') return warn('read.warn.type2plus', 'plans', 'read.action.seePlans')
-  if (c.repairPref === 'garage') return warn('read.warn.garage', 'plans', 'read.action.seePlans')
+  if (quote.coverage === 'type_3_plus') return warn('read.warn.type3plus')
+  if (quote.coverage === 'type_2_plus') return warn('read.warn.type2plus')
+  if (c.repairPref === 'garage') return warn('read.warn.garage')
   return null
 }
 
@@ -130,8 +130,6 @@ export function buildAdvisorRead(a: Answers, c: PriceControls, quote: Quote): Ad
         labelKey: 'read.label.warning',
         bodyKey: 'read.warn.commercial',
         shortKey: 'read.short.commercial',
-        actionKey: 'read.action.seePlans',
-        target: 'plans',
         severity: 'warning',
       },
     ]

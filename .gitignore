@@ -2,6 +2,8 @@ node_modules/
 dist/
 /Scraper/data/
 *.log
+tsconfig.tsbuildinfo
+tni-advisor/output/
 
 # Local Netlify folder
 .netlify

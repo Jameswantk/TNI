@@ -2,7 +2,7 @@
 
 This file is intended for future LLMs, developers, product managers, and implementation partners working on the TNI AI Insurance Advisor project. Treat this as durable project context. Update it when key scope, product, compliance, or implementation decisions change.
 
-Last updated: 2026-06-24
+Last updated: 2026-06-28
 
 ## 0. Confirmed Client Decisions (2026-06-19)
 
@@ -1289,3 +1289,175 @@ advisor-confirms gate and indicative framing prominent as these are added.
 
 MrKumka (car, Type 1), Roojai (car, Type 3+, FAQ), Rabbit Care, CheckDi
 (pay-per-mile), Thaivivat, Chubb (sum-insured / Type 1 premium), AXA (Type 1).
+
+
+## 31. Recommendation-Screen UX: Co-pilot Placement + Navigation Hierarchy (2026-06-27)
+
+This section records the latest UX decision from the Thanachart/TNI fork review.
+It applies to the recommendation screen in `tni-advisor`, and should also be
+backported to the original Indara implementation where the same component pattern
+exists.
+
+### 31.1 Do not let inline advisor warnings navigate to the plans screen
+
+Issue found in the live rail:
+
+- The `Watch out` row inside `TNI's read` showed a small `See plans` button.
+- Clicking it jumped the user to the recommendations screen.
+- This felt like a UX trap because the button looked like a contextual helper,
+  not a major screen transition.
+
+Decision:
+
+- `TNI's read` warning rows should be **informational by default**.
+- Only rows that adjust an existing rail control should show an action button
+  (`Confirm`, `Adjust`, `Sharpen`).
+- Generic coverage warnings such as "Type 2+ may not cover solo accidents" should
+  not have an inline navigation button.
+- The deliberate navigation to recommendations remains the large primary CTA:
+  `See my 3 plans`.
+
+Implementation note:
+
+- Remove `plans` from the advisor-read action target type.
+- Remove `read.action.seePlans` from i18n if unused.
+- Remove `if (target === 'plans') return onSeePlans()` from the rail action
+  handler.
+- Keep the main rail CTA wired to `onSeePlans`.
+
+### 31.2 Coverage Co-pilot should not interrupt plan comparison
+
+Issue found in the recommendations screen:
+
+- `Coverage Co-pilot` currently renders immediately after the highlighted /
+  recommended plan card and before `Other options`.
+- This makes sense conceptually because Co-pilot answers questions about the
+  highlighted plan.
+- In practice, the module is too large in that position: it pushes the other plan
+  cards below the fold, visually competes with the recommended plan, and breaks
+  the user's natural compare-then-decide flow.
+
+Decision:
+
+- Do **not** keep a full Co-pilot card between the recommended plan and the other
+  plan options.
+- Preferred MVP placement: a **compact collapsed helper bar** directly under the
+  recommended card, for example:
+  `Have a coverage question?  What could surprise me?  Type 1 vs 2+  Who can drive?`
+- Expand the full Co-pilot UI only after the user clicks a prompt or focuses the
+  input.
+- Secondary acceptable placement: move the full Co-pilot below all three plan
+  cards / below comparison, so plan scanning remains uninterrupted.
+
+Rationale:
+
+- The recommendation screen's primary job is plan selection and comparison.
+- AI help should reduce uncertainty, not hijack the layout.
+- Keeping Co-pilot visible as a compact helper preserves the "AI-native" demo
+  value while preventing feature bloat.
+- Contextual warning text can still appear on plan cards; the larger Q&A surface
+  should be opt-in.
+
+### 31.3 Recommendation-screen hierarchy
+
+Recommended order:
+
+1. Back to price.
+2. Short recommendation explanation (`Best fit: ...`).
+3. Highlighted recommended plan card.
+4. Compact Co-pilot helper bar (collapsed by default).
+5. Other plan cards.
+6. Compare plans / expanded table.
+7. Full Coverage Co-pilot only if expanded, or below all plans if using the
+   secondary placement.
+
+This keeps the user focused on the decision while still surfacing the AI advisor
+layer at the moment it can help.
+
+
+## 32. Thanachart Demo UI Implementation Pass (2026-06-28)
+
+This section records the implemented state of the `tni-advisor/` demo after the
+Claude + Codex usability pass. It supersedes section 31 where that section only
+described proposed recommendation-screen changes.
+
+### 32.1 Coverage Co-pilot relocation is implemented
+
+The recommendation screen no longer places the full `Coverage Co-pilot` card
+between the recommended plan and `Other options`.
+
+Implemented behavior:
+
+- The recommended plan remains directly followed by a compact `Coverage Co-pilot`
+  drawer.
+- The drawer is collapsed by default and opens only when the user chooses to use
+  it.
+- Users can still type plain-language questions into the Co-pilot input after
+  expanding it.
+- Other plan cards remain visible sooner, preserving the compare-then-decide
+  flow.
+
+Product rule going forward:
+
+- Keep Co-pilot available, but opt-in.
+- Do not let AI helper surfaces interrupt plan comparison.
+- If a future design moves the full Co-pilot again, place it below all plan cards
+  or behind an explicit expand action.
+
+### 32.2 Claude feedback executed
+
+The following review items were implemented in `tni-advisor/`:
+
+- Reference IDs now use the `TNI-` prefix instead of the older `IND-` prefix.
+- Customer-facing copy now says `Thanachart Insurance` instead of internal or
+  legacy wording where applicable.
+- The internal advisor preview was removed from the customer-facing journey.
+- Price rail wording now separates the typical annual premium from the wider
+  range and "best case if all savings apply."
+- Lead form validation now focuses the first invalid field on submit.
+- Claim/privacy modals now support focus-on-open, Escape close, scroll lock,
+  `aria-labelledby`, and Tab trapping.
+- Duplicate lead CTAs were removed so the recommendation screen has a clearer
+  action hierarchy.
+- The compare table uses clearer yes/no visual states.
+- Thai matching and catalog coverage were improved for the demo journey.
+
+### 32.3 Official Thanachart Insurance logo added
+
+The header now uses the official transparent Thanachart Insurance logo instead of
+a recreated orange badge or text mark.
+
+Source used:
+
+- `https://www.thanachart-insurance.co.th/dist/img/menu/logo.png`
+
+Implementation notes:
+
+- The asset was saved at `tni-advisor/src/assets/thanachart-insurance-logo.png`.
+- The downloaded PNG was verified as `2362x332`, `Format32bppArgb`, with
+  transparency present.
+- `Header.tsx` imports the PNG and renders it as the brand mark.
+- `src/vite-env.d.ts` was added so TypeScript accepts imported image assets.
+- On small mobile widths, the duplicate brand title/status is hidden so the
+  official logo and header actions fit cleanly.
+
+### 32.4 UI polish and verification
+
+Implemented polish:
+
+- CSS color token naming was cleaned up from `--blue*` to `--accent*` because the
+  active brand accent is orange.
+- Mobile tap targets for chips, rail controls, header buttons, plan actions, and
+  send buttons were increased to a 44px minimum.
+- The orange focus/pulse accent now matches the renamed brand accent token.
+
+Verification completed:
+
+- `npm run build` passes.
+- The only build warning is the existing large-bundle warning.
+- Playwright smoke-tested the running preview on `http://127.0.0.1:5178/`.
+- Desktop header logo rendered at `132x28`; mobile logo rendered at `126x27`.
+- Mobile header at `375x812` rendered cleanly at about `69px` high.
+- Common mobile tap targets measured at `44px`.
+- No browser console errors were observed beyond the normal React DevTools info
+  message.

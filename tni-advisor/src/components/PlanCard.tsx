@@ -1,10 +1,11 @@
-import type { PlanRecommendation } from '../types'
+import type { PlanRecommendation, PriceControls } from '../types'
 import type { PlanAiExplanation } from '../lib/aiAdvisor'
 
 interface Props {
   t: (key: string, params?: Record<string, string>) => string
   rec: PlanRecommendation
   insuredValue: number
+  controls: PriceControls
   commercial: boolean
   expanded: boolean
   aiExplanation: PlanAiExplanation
@@ -15,7 +16,19 @@ interface Props {
 
 const baht = (n: number) => '฿' + n.toLocaleString()
 
-export function PlanCard({ t, rec, insuredValue, commercial, expanded, aiExplanation, upgrade, onToggleWhy, onInterested }: Props) {
+function assumptionChips(t: Props['t'], controls: PriceControls) {
+  const chips: string[] = []
+  if (controls.ncb !== 'none' && controls.ncb !== 'unsure') chips.push(`${t('ctrl.ncb')}: ${t('ncb.' + controls.ncb)}`)
+  if (controls.namedDriver !== 'any') chips.push(t('named.' + controls.namedDriver))
+  if (controls.dashcam) chips.push(t('ctrl.dashcam'))
+  if (controls.higherExcess) chips.push(t('ctrl.excess'))
+  if (controls.mileage !== 'unsure') chips.push(`${t('ctrl.mileage')}: ${t('mile.' + controls.mileage)}`)
+  if (controls.province) chips.push(t('opt.prov.' + controls.province))
+  return chips
+}
+
+export function PlanCard({ t, rec, insuredValue, controls, commercial, expanded, aiExplanation, upgrade, onToggleWhy, onInterested }: Props) {
+  const assumptions = assumptionChips(t, controls)
   return (
     <div className={`plan-card${rec.recommended ? ' featured' : ''}`}>
       {rec.recommended && <span className="plan-badge">{t('plan.recommended')}</span>}
@@ -45,6 +58,14 @@ export function PlanCard({ t, rec, insuredValue, commercial, expanded, aiExplana
       <div className="plan-insured">
         <i className="ti ti-shield-half" aria-hidden="true" /> {t('plan.insuredValue', { v: insuredValue.toLocaleString() })}
       </div>
+
+      {assumptions.length > 0 && (
+        <div className="plan-assumptions" aria-label={t('plan.assumptions')}>
+          {assumptions.slice(0, 4).map((a) => (
+            <span className="assumption-chip" key={a}>{a}</span>
+          ))}
+        </div>
+      )}
 
       <div className="benefit-chips">
         {rec.benefitKeys.map((b) => (
@@ -91,10 +112,10 @@ export function PlanCard({ t, rec, insuredValue, commercial, expanded, aiExplana
           </div>
           <p>{aiExplanation.summary}</p>
           <ul className="why-list">
-            {aiExplanation.whyItFits.map((w) => (
+            {aiExplanation.whyItFits.slice(0, 2).map((w) => (
               <li key={w}>{w}</li>
             ))}
-            {aiExplanation.watchOut.map((w) => (
+            {aiExplanation.watchOut.slice(0, 1).map((w) => (
               <li className="watch" key={w}>{w}</li>
             ))}
             {aiExplanation.upgradeNote && <li>{aiExplanation.upgradeNote}</li>}
@@ -104,10 +125,10 @@ export function PlanCard({ t, rec, insuredValue, commercial, expanded, aiExplana
       )}
 
       <div className="plan-actions">
-        <button className="btn-ghost" onClick={onToggleWhy}>
+        <button className="btn-ghost" type="button" aria-expanded={expanded} onClick={onToggleWhy}>
           {t('ai.plan.button')}
         </button>
-        <button className="btn-primary" onClick={onInterested}>
+        <button className="btn-primary" type="button" onClick={onInterested}>
           {commercial ? t('lead.human') : t('plan.interested')}
         </button>
       </div>

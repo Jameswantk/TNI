@@ -137,7 +137,7 @@ export interface PlanRecommendation extends Quote {
 // One row of "TNI's read" — the thin deterministic advisor layer that
 // interprets the quote (best next saving / biggest assumption / coverage warning).
 // Rule-based, no LLM (project memory §4, §14). Targets point at existing controls.
-export type AdvisorTarget = 'ncb' | 'named' | 'repair' | 'dashcam' | 'mileage' | 'excess' | 'sharpen' | 'plans'
+export type AdvisorTarget = 'ncb' | 'named' | 'repair' | 'dashcam' | 'mileage' | 'excess' | 'sharpen'
 export interface AdvisorReadItem {
   kind: 'saving' | 'assumption' | 'warning'
   icon: string

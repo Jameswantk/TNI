@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import type { Lead, PlanRecommendation } from '../types'
 
 interface Props {
@@ -6,22 +6,40 @@ interface Props {
   plan: PlanRecommendation
   onBack: () => void
   onSubmit: (lead: Lead) => void
+  onOpenPrivacy: () => void
 }
 
-export function LeadForm({ t, plan, onBack, onSubmit }: Props) {
+export function LeadForm({ t, plan, onBack, onSubmit, onOpenPrivacy }: Props) {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [lineId, setLineId] = useState('')
   const [callback, setCallback] = useState('afternoon')
   const [renewal, setRenewal] = useState('soon')
   const [consent, setConsent] = useState(false)
+  const [attempted, setAttempted] = useState(false)
+  const [touched, setTouched] = useState({ name: false, phone: false, consent: false })
+  const nameRef = useRef<HTMLInputElement>(null)
+  const phoneRef = useRef<HTMLInputElement>(null)
+  const consentRef = useRef<HTMLInputElement>(null)
 
-  const valid = name.trim() !== '' && phone.trim() !== '' && consent
+  const phoneDigits = phone.replace(/\D/g, '')
+  const phoneOk = phoneDigits.length >= 7 && /^[0-9+\-\s()]+$/.test(phone.trim())
+  const valid = name.trim() !== '' && phoneOk && consent
 
   function submit() {
-    if (!valid) return
+    setAttempted(true)
+    if (!valid) {
+      if (name.trim() === '') nameRef.current?.focus()
+      else if (!phoneOk) phoneRef.current?.focus()
+      else consentRef.current?.focus()
+      return
+    }
     onSubmit({ name: name.trim(), phone: phone.trim(), lineId: lineId.trim(), callback, renewal, consent })
   }
+
+  const showNameHint = (attempted || touched.name) && name.trim() === ''
+  const showPhoneHint = (attempted || touched.phone) && !phoneOk
+  const showConsentHint = (attempted || touched.consent) && !consent
 
   return (
     <div className="lead-form">
@@ -31,10 +49,12 @@ export function LeadForm({ t, plan, onBack, onSubmit }: Props) {
       <p className="lead-intro">{t('lead.intro', { plan: t('plan.' + plan.id) })}</p>
 
       <label className="field-label" htmlFor="lead-name">{t('lead.name')}</label>
-      <input id="lead-name" className="field" value={name} onChange={(e) => setName(e.target.value)} />
+      <input ref={nameRef} id="lead-name" className="field" value={name} onBlur={() => setTouched((x) => ({ ...x, name: true }))} onChange={(e) => setName(e.target.value)} />
+      {showNameHint && <p className="field-hint">{t('lead.nameHint')}</p>}
 
       <label className="field-label" htmlFor="lead-phone">{t('lead.phone')}</label>
-      <input id="lead-phone" className="field" value={phone} onChange={(e) => setPhone(e.target.value)} inputMode="tel" />
+      <input ref={phoneRef} id="lead-phone" className="field" value={phone} onBlur={() => setTouched((x) => ({ ...x, phone: true }))} onChange={(e) => setPhone(e.target.value)} inputMode="tel" />
+      {showPhoneHint && <p className="field-hint">{t('lead.phoneHint')}</p>}
 
       <div className="field-row">
         <div className="field-col">
@@ -62,17 +82,15 @@ export function LeadForm({ t, plan, onBack, onSubmit }: Props) {
       </select>
 
       <label className="consent">
-        <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} />
+        <input ref={consentRef} type="checkbox" checked={consent} onBlur={() => setTouched((x) => ({ ...x, consent: true }))} onChange={(e) => setConsent(e.target.checked)} />
         <span>
-          {t('lead.consent')} <a href="#privacy" onClick={(e) => e.preventDefault()}>{t('lead.privacy')}</a>
+          {t('lead.consent')} <a href="#privacy" onClick={(e) => { e.preventDefault(); onOpenPrivacy() }}>{t('lead.privacy')}</a>
         </span>
       </label>
+      {showConsentHint && <p className="field-hint">{t('lead.consentHint')}</p>}
 
-      <button className="btn-primary btn-block" disabled={!valid} onClick={submit}>
+      <button className={`btn-primary btn-block${valid ? '' : ' is-incomplete'}`} type="button" onClick={submit}>
         {t('lead.submit')}
-      </button>
-      <button className="btn-link" onClick={submit} disabled={!valid}>
-        {t('lead.human')}
       </button>
     </div>
   )

@@ -45,8 +45,8 @@ export const planTemplates: PlanTemplate[] = [
   },
 ]
 
-// Generates a human-facing lead reference like IND-24891. Placeholder until the
+// Generates a human-facing lead reference like TNI-24891. Placeholder until the
 // backend issues real, persisted reference numbers.
 export function makeReference(): string {
-  return 'IND-' + Math.floor(20000 + Math.random() * 9999)
+  return 'TNI-' + Math.floor(20000 + Math.random() * 9999)
 }

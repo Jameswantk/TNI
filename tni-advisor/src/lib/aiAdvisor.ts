@@ -192,7 +192,7 @@ export function answerCoverageQuestion(t: T, question: string, rec?: PlanRecomme
   } else if (/(garage|dealer|repair|ศูนย์|อู่)/.test(q)) {
     add(t('ai.cite.repair'))
     answer = t('ai.answer.repair')
-  } else if (/(claim|accident|solo|flood|theft|fire|cover|not cover|surprise|เคลม|คุ้มครอง)/.test(q)) {
+  } else if (/(claim|accident|solo|flood|theft|fire|cover|not cover|surprise|watch|ระวัง|เคลม|คุ้มครอง)/.test(q)) {
     add(t('ai.cite.coverageGaps'))
     const gaps = rec?.gapKeys?.map((g) => t(`gap.${g}`)).join(', ')
     answer = gaps ? t('ai.answer.gapsForPlan', { gaps }) : t('ai.answer.gapsGeneral')

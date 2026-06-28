@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import type { Answers, Lang, Lead, PlanId, PriceControls, Stage } from './types'
 import { defaultControls } from './types'
 import { flow, isCoreComplete, type StepKey } from './data/flow'
@@ -27,9 +27,8 @@ export default function App() {
   const [reference, setReference] = useState('')
   const [lead, setLead] = useState<Lead | null>(null)
   const [claimOpen, setClaimOpen] = useState(false)
+  const [privacyOpen, setPrivacyOpen] = useState(false)
   const [oneShotDraft, setOneShotDraft] = useState<OneShotDraft | null>(null)
-
-  const railRef = useRef<HTMLDivElement>(null)
 
   const t = (key: string, params?: Record<string, string>) => translate(lang, key, params)
 
@@ -179,10 +178,6 @@ export default function App() {
     setControls((c) => ({ ...c, ...patch }))
   }
 
-  function scrollToRail() {
-    railRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }
-
   function onInterested(id: PlanId) {
     setSelectedPlanId(id)
     setStage('lead')
@@ -218,9 +213,24 @@ export default function App() {
   const showRail = stage === 'tune'
   const showResults = stage === 'recommendations' || stage === 'lead' || stage === 'confirmed'
 
+  useEffect(() => {
+    document.documentElement.lang = lang
+  }, [lang])
+
   return (
     <div className="app">
       <Header t={t} lang={lang} onToggleLang={() => setLang(lang === 'en' ? 'th' : 'en')} onOpenClaim={() => setClaimOpen(true)} />
+      <section className="brand-ribbon" aria-label={t('brand.ribbonAria')}>
+        <div className="brand-ribbon-main">
+          <span className="brand-ribbon-kicker">{t('brand.ribbonKicker')}</span>
+          <strong>{t('brand.ribbonTitle')}</strong>
+        </div>
+        <div className="brand-proof">
+          <span><i className="ti ti-car" aria-hidden="true" /> {t('brand.proof.motor')}</span>
+          <span><i className="ti ti-headset" aria-hidden="true" /> {t('brand.proof.claims')}</span>
+          <span><i className="ti ti-phone" aria-hidden="true" /> {t('brand.proof.hotline')}</span>
+        </div>
+      </section>
       <Stepper t={t} answers={answers} atTune={atTune} onStepClick={onStepClick} />
 
       <div className="app-body">
@@ -239,7 +249,7 @@ export default function App() {
           onCancelNaturalIntake={() => setOneShotDraft(null)}
         />
 
-        <div className="right-pane" ref={railRef}>
+        <div className="right-pane">
           {intakeActive && !coreComplete && (
             <aside className="results-panel placeholder">
               <div className="ph-icon" aria-hidden="true">
@@ -282,6 +292,7 @@ export default function App() {
               onInterested={onInterested}
               onSubmitLead={onSubmitLead}
               onRestart={onRestart}
+              onOpenPrivacy={() => setPrivacyOpen(true)}
             />
           )}
         </div>
@@ -293,22 +304,75 @@ export default function App() {
           <div>
             <div className="mpb-label">{t('rail.liveEstimate')}</div>
             <div className="mpb-price">
-              {quoteConfidence.commercial ? t('mpb.advisor') : `${baht(quote.min)}-${baht(quote.max)}`}
+              {quoteConfidence.commercial ? t('mpb.advisor') : `${baht(quote.median)} · ${t('rail.typical')}`}
             </div>
           </div>
-          <button className="cta" onClick={scrollToRail}>
-            {t('rail.sharpenOrLower')} <i className="ti ti-chevron-up" aria-hidden="true" />
+          <button className="cta" type="button" onClick={() => setStage('recommendations')}>
+            {t('rail.seePlans')} <i className="ti ti-arrow-right" aria-hidden="true" />
           </button>
         </div>
       )}
 
       <footer className="app-footer">
-        {t('rec.disclaimer')} · <a href="#privacy" onClick={(e) => e.preventDefault()}>{t('lead.privacy')}</a>
+        {t('rec.disclaimer')} <span aria-hidden="true">-</span>{' '}
+        <a href="#privacy" onClick={(e) => { e.preventDefault(); setPrivacyOpen(true) }}>{t('lead.privacy')}</a>
       </footer>
 
       {claimOpen && (
         <ClaimCalculator t={t} defaultPremium={quote.median} defaultNcb={controls.ncb} onClose={() => setClaimOpen(false)} />
       )}
+      {privacyOpen && <PrivacyModal t={t} onClose={() => setPrivacyOpen(false)} />}
+    </div>
+  )
+}
+
+function PrivacyModal({ t, onClose }: { t: (key: string, params?: Record<string, string>) => string; onClose: () => void }) {
+  const modalRef = useRef<HTMLDivElement>(null)
+  const closeRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose()
+      if (event.key === 'Tab') {
+        const focusable = modalRef.current?.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+        )
+        if (!focusable?.length) return
+        const first = focusable[0]
+        const last = focusable[focusable.length - 1]
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault()
+          last.focus()
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault()
+          first.focus()
+        }
+      }
+    }
+    window.addEventListener('keydown', onKeyDown)
+    closeRef.current?.focus()
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', onKeyDown)
+    }
+  }, [onClose])
+
+  return (
+    <div className="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="privacy-title" onClick={onClose}>
+      <div ref={modalRef} className="modal privacy-modal" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-head">
+          <span className="modal-title" id="privacy-title">
+            <i className="ti ti-shield-lock" aria-hidden="true" /> {t('privacy.title')}
+          </span>
+          <button ref={closeRef} className="modal-close" type="button" onClick={onClose} aria-label={t('privacy.close')}>
+            <i className="ti ti-x" />
+          </button>
+        </div>
+        <p className="modal-sub">{t('privacy.body')}</p>
+        <button className="btn-primary btn-block" type="button" onClick={onClose}>{t('privacy.close')}</button>
+      </div>
     </div>
   )
 }

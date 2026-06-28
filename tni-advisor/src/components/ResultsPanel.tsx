@@ -4,7 +4,7 @@ import { assessConfidence, insuredValue } from '../lib/pricing'
 import { PlanCard } from './PlanCard'
 import { LeadForm } from './LeadForm'
 import { CoverageCopilot } from './CoverageCopilot'
-import { buildAdvisorBrief, buildPlanAiExplanation } from '../lib/aiAdvisor'
+import { buildPlanAiExplanation } from '../lib/aiAdvisor'
 
 interface Props {
   t: (key: string, params?: Record<string, string>) => string
@@ -20,6 +20,7 @@ interface Props {
   onInterested: (id: PlanId) => void
   onSubmitLead: (lead: Lead) => void
   onRestart: () => void
+  onOpenPrivacy: () => void
 }
 
 const baht = (n: number) => '฿' + n.toLocaleString()
@@ -38,6 +39,7 @@ export function ResultsPanel(props: Props) {
   const { t, stage, recs, answers, controls, selectedPlan, reference, lead } = props
   const [expandedWhy, setExpandedWhy] = useState<PlanId | null>(null)
   const [showCompare, setShowCompare] = useState(false)
+  const [showCopilot, setShowCopilot] = useState(false)
   const currentInsuredValue = insuredValue(answers, controls)
   const highlightedPlan = recs.find((r) => r.recommended) ?? recs[0]
   const otherPlans = recs.filter((r) => r.id !== highlightedPlan?.id)
@@ -50,6 +52,7 @@ export function ResultsPanel(props: Props) {
         t={t}
         rec={rec}
         insuredValue={currentInsuredValue}
+        controls={controls}
         commercial={assessConfidence(answers, controls, rec).commercial}
         upgrade={upgrade}
         aiExplanation={buildPlanAiExplanation(t, answers, controls, rec, upgrade)}
@@ -78,10 +81,25 @@ export function ResultsPanel(props: Props) {
         </div>
 
         {renderPlanCard(highlightedPlan)}
-        <CoverageCopilot t={t} plan={highlightedPlan} />
 
         <div className="plan-section-title">{t('plan.otherOptions')}</div>
         {otherPlans.map(renderPlanCard)}
+
+        <div className="copilot-drawer">
+          <button
+            className="copilot-drawer-toggle"
+            type="button"
+            aria-expanded={showCopilot}
+            onClick={() => setShowCopilot(!showCopilot)}
+          >
+            <span>
+              <i className="ti ti-message-question" aria-hidden="true" /> {t('copilot.drawer.title')}
+            </span>
+            <i className={`ti ti-chevron-${showCopilot ? 'up' : 'down'}`} aria-hidden="true" />
+          </button>
+          <p>{t('copilot.drawer.body')}</p>
+          {showCopilot && <CoverageCopilot t={t} plan={highlightedPlan} />}
+        </div>
 
         <button className="btn-ghost btn-block" onClick={() => setShowCompare(!showCompare)}>
           {t('plan.compare')}
@@ -98,7 +116,7 @@ export function ResultsPanel(props: Props) {
             </thead>
             <tbody>
               <tr>
-                <td>{t('sum.lookingFor')}</td>
+                <td>{t('compare.coverage')}</td>
                 {recs.map((r) => (
                   <td key={r.id}>{t('cov.' + r.coverage)}</td>
                 ))}
@@ -109,8 +127,14 @@ export function ResultsPanel(props: Props) {
                   <td key={r.id}>{t('repair.' + r.repair)}</td>
                 ))}
               </tr>
+              <CompareRow t={t} labelKey="compare.ownDamage" recs={recs} check={(r) => hasBenefit(r, 'ownDamage')} />
+              <CompareRow t={t} labelKey="compare.theftFire" recs={recs} check={(r) => hasBenefit(r, 'theftFire')} />
+              <CompareRow t={t} labelKey="compare.flood" recs={recs} check={(r) => hasBenefit(r, 'flood') || hasBenefit(r, 'floodOpt')} />
+              <CompareRow t={t} labelKey="compare.soloAccident" recs={recs} check={(r) => !hasGap(r, 'gapSolo')} />
+              <CompareRow t={t} labelKey="compare.dealerRepair" recs={recs} check={(r) => r.repair === 'dealer'} />
+              <CompareRow t={t} labelKey="compare.roadside" recs={recs} check={(r) => hasBenefit(r, 'roadside')} />
               <tr>
-                <td>{t('plan.perYear')}</td>
+                <td>{t('conf.estimatedRange')}</td>
                 {recs.map((r) => (
                   <td key={r.id}>
                     {assessConfidence(answers, controls, r).commercial
@@ -140,6 +164,7 @@ export function ResultsPanel(props: Props) {
           plan={selectedPlan}
           onBack={props.onBackToRecommendations}
           onSubmit={props.onSubmitLead}
+          onOpenPrivacy={props.onOpenPrivacy}
         />
       </aside>
     )
@@ -147,7 +172,6 @@ export function ResultsPanel(props: Props) {
 
   if (stage === 'confirmed' && selectedPlan && lead) {
     const selectedConfidence = assessConfidence(answers, controls, selectedPlan)
-    const advisorBrief = buildAdvisorBrief(t, answers, controls, selectedPlan, selectedConfidence, lead, reference)
     return (
       <aside className="results-panel">
         <div className="confirm-card">
@@ -165,7 +189,7 @@ export function ResultsPanel(props: Props) {
             <Row label={t('lead.phone')} value={lead.phone} />
             <Row label={t('rec.title')} value={t('plan.' + selectedPlan.id)} />
             <Row
-              label={t('sum.lookingFor')}
+              label={t('conf.estimatedRange')}
               value={
                 selectedConfidence.commercial
                   ? t('plan.commercialAdvisor')
@@ -180,23 +204,6 @@ export function ResultsPanel(props: Props) {
             {t('conf.again')}
           </button>
         </div>
-        <div className="advisor-brief internal-preview">
-          <div className="internal-badge">
-            <i className="ti ti-lock" aria-hidden="true" /> {t('ai.brief.internalBadge')}
-          </div>
-          <div className="ai-section-title">
-            <i className="ti ti-briefcase" aria-hidden="true" /> {t('ai.brief.title')}
-          </div>
-          <p className="internal-note">{t('ai.brief.internalNote')}</p>
-          <p className="ai-muted">{t('ai.brief.body')}</p>
-          <BriefSection title={t('ai.brief.customerTitle')} rows={advisorBrief.customerContext} />
-          <BriefSection title={t('ai.brief.quoteTitle')} rows={advisorBrief.quoteContext} />
-          <BriefSection title={t('ai.brief.confirmTitle')} rows={advisorBrief.confirmNext} />
-          <div className="brief-script">
-            <span>{t('ai.brief.script')}</span>
-            <p>{advisorBrief.suggestedOpening}</p>
-          </div>
-        </div>
       </aside>
     )
   }
@@ -204,16 +211,34 @@ export function ResultsPanel(props: Props) {
   return null
 }
 
-function BriefSection({ title, rows }: { title: string; rows: string[] }) {
+function hasBenefit(rec: PlanRecommendation, key: string) {
+  return rec.benefitKeys.includes(key)
+}
+
+function hasGap(rec: PlanRecommendation, key: string) {
+  return rec.gapKeys.includes(key)
+}
+
+function CompareRow({
+  t,
+  labelKey,
+  recs,
+  check,
+}: {
+  t: (key: string, params?: Record<string, string>) => string
+  labelKey: string
+  recs: PlanRecommendation[]
+  check: (rec: PlanRecommendation) => boolean
+}) {
   return (
-    <div className="brief-section">
-      <strong>{title}</strong>
-      <ul>
-        {rows.map((r) => (
-          <li key={r}>{r}</li>
-        ))}
-      </ul>
-    </div>
+    <tr>
+      <td>{t(labelKey)}</td>
+      {recs.map((r) => (
+        <td key={r.id} className={check(r) ? 'yes' : 'no'}>
+          {check(r) ? t('compare.yes') : t('compare.no')}
+        </td>
+      ))}
+    </tr>
   )
 }
 

@@ -57,15 +57,77 @@ export const catalog: CatalogBrand[] = [
   { brand: 'Nissan', models: [{ label: 'Almera', group: 'nissan_almera' }] },
   { brand: 'Ford', models: [{ label: 'Ranger', group: 'ford_ranger' }] },
   { brand: 'MG', models: [{ label: 'ZS', group: 'mg_zs' }] },
-  { brand: 'BYD', models: [{ label: 'Atto 3', group: 'byd_atto3', ev: true }] },
-  { brand: 'Mercedes-Benz', models: [] },
-  { brand: 'BMW', models: [] },
-  { brand: 'Suzuki', models: [] },
-  { brand: 'Hyundai', models: [] },
-  { brand: 'Kia', models: [] },
-  { brand: 'GWM', models: [] },
-  { brand: 'Tesla', models: [] },
-  { brand: 'Neta', models: [] },
+  {
+    brand: 'BYD',
+    models: [
+      { label: 'Atto 3', group: 'byd_atto3', ev: true },
+      { label: 'Dolphin', group: 'byd_dolphin', ev: true },
+      { label: 'Seal', group: 'byd_seal', ev: true },
+    ],
+  },
+  {
+    brand: 'Mercedes-Benz',
+    models: [
+      { label: 'A-Class', group: 'mercedes_benz_a_class' },
+      { label: 'C200', group: 'mercedes_benz_c200' },
+      { label: 'E220', group: 'mercedes_benz_e220' },
+      { label: 'CLA', group: 'mercedes_benz_cla' },
+      { label: 'GLC', group: 'mercedes_benz_glc' },
+    ],
+  },
+  {
+    brand: 'BMW',
+    models: [
+      { label: '320i', group: 'bmw_320i' },
+      { label: '520d', group: 'bmw_520d' },
+      { label: 'M340i', group: 'bmw_m340i' },
+      { label: 'X1', group: 'bmw_x1' },
+      { label: 'X3', group: 'bmw_x3' },
+    ],
+  },
+  {
+    brand: 'Suzuki',
+    models: [
+      { label: 'Swift', group: 'suzuki_swift' },
+      { label: 'Ciaz', group: 'suzuki_ciaz' },
+    ],
+  },
+  {
+    brand: 'Hyundai',
+    models: [
+      { label: 'H-1', group: 'hyundai_h1' },
+      { label: 'Tucson', group: 'hyundai_tucson' },
+    ],
+  },
+  {
+    brand: 'Kia',
+    models: [
+      { label: 'Carnival', group: 'kia_carnival' },
+      { label: 'Seltos', group: 'kia_seltos' },
+    ],
+  },
+  {
+    brand: 'GWM',
+    models: [
+      { label: 'Haval H6', group: 'gwm_haval_h6' },
+      { label: 'Ora Good Cat', group: 'gwm_ora_good_cat', ev: true },
+      { label: 'Tank 300', group: 'gwm_tank_300' },
+    ],
+  },
+  {
+    brand: 'Tesla',
+    models: [
+      { label: 'Model 3', group: 'tesla_model_3', ev: true },
+      { label: 'Model Y', group: 'tesla_model_y', ev: true },
+    ],
+  },
+  {
+    brand: 'Neta',
+    models: [
+      { label: 'V', group: 'neta_v', ev: true },
+      { label: 'X', group: 'neta_x', ev: true },
+    ],
+  },
 ]
 
 // Brands whose every model is electric — used so a free-typed EV brand still
