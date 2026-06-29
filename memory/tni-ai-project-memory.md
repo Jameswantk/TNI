@@ -2,7 +2,7 @@
 
 This file is intended for future LLMs, developers, product managers, and implementation partners working on the TNI AI Insurance Advisor project. Treat this as durable project context. Update it when key scope, product, compliance, or implementation decisions change.
 
-Last updated: 2026-06-28
+Last updated: 2026-06-29
 
 ## 0. Confirmed Client Decisions (2026-06-19)
 
@@ -1461,3 +1461,28 @@ Verification completed:
 - Common mobile tap targets measured at `44px`.
 - No browser console errors were observed beyond the normal React DevTools info
   message.
+
+### 32.5 Final label polish and Netlify deployment (2026-06-29)
+
+Latest small copy decisions now implemented in `tni-advisor/`:
+
+- The price-rail advisor card title is `TNI's read` in English and
+  `TNI วิเคราะห์ให้` in Thai.
+- The savings label is capitalized as `Best case if all savings apply` in
+  English.
+
+Netlify hosting is configured and live:
+
+- Production URL: `https://tni-advisor-jameswantk.netlify.app`
+- Netlify project name: `tni-advisor-jameswantk`
+- Netlify project ID: `2d5d0dc5-baa1-45df-934c-ad17be49da9c`
+- Config file: `tni-advisor/netlify.toml`
+- Build command: `npm run build`
+- Publish directory: `dist`
+- SPA fallback: all routes redirect to `/index.html` with status `200`.
+
+Deployment verification completed:
+
+- Production homepage returned HTTP `200`.
+- Page title was `Thanachart Insurance Advisor Demo`.
+- Deployed JS and CSS assets returned HTTP `200`.
