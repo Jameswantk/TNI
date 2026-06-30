@@ -2,7 +2,7 @@
 
 This file is intended for future LLMs, developers, product managers, and implementation partners working on the TNI AI Insurance Advisor project. Treat this as durable project context. Update it when key scope, product, compliance, or implementation decisions change.
 
-Last updated: 2026-06-29
+Last updated: 2026-06-30
 
 ## 0. Confirmed Client Decisions (2026-06-19)
 
@@ -1486,3 +1486,50 @@ Deployment verification completed:
 - Production homepage returned HTTP `200`.
 - Page title was `Thanachart Insurance Advisor Demo`.
 - Deployed JS and CSS assets returned HTTP `200`.
+
+### 32.6 Live-site stack exposure check (2026-06-30, Codex)
+
+Verified against `https://tni-advisor-jameswantk.netlify.app/` on 2026-06-30.
+The live site does expose normal public fingerprinting signals, but no sensitive
+source/config leak was found in this pass.
+
+Publicly visible signals:
+
+- Hosting is explicit: the `netlify.app` URL is public, and response headers
+  include `Server: Netlify`, `Cache-Status: "Netlify Edge"`, and
+  `X-Nf-Request-Id`.
+- The page is a static bundled SPA: HTML loads hashed assets such as
+  `/assets/index-vKkh86Ug.js` and `/assets/index-CRkXQoXe.css`.
+- React is discoverable in the production bundle through runtime strings such as
+  `React`, `createRoot`, `useState`, `useEffect`, `jsx`, and the React
+  error-decoder URL.
+- External UI dependencies are visible in HTML: Google Fonts (`Inter` and
+  `Noto Sans Thai`) and Tabler Icons webfont from jsDelivr
+  (`@tabler/icons-webfont@3.24.0`).
+- The document title is `Thanachart Insurance Advisor Demo`.
+
+No sensitive exposure observed:
+
+- The deployed JS/CSS did not reference source maps with `sourceMappingURL`.
+- Requests for `.map`, `/package.json`, `/vite.config.ts`, `/robots.txt`, and
+  `/assets/` returned the SPA fallback HTML rather than real source/config
+  files.
+- No obvious app API keys, tokens, Supabase/Firebase/OpenAI/Anthropic config, or
+  external backend URLs were found in the bundle scan. A `SECRET` string hit was
+  React's internal `__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED`, not an
+  application secret.
+
+Recommended hardening before a more public/client-facing pilot:
+
+- Move to a custom domain; if hiding host fingerprinting matters, put a CDN/WAF
+  such as Cloudflare in front of Netlify rather than relying on the `netlify.app`
+  hostname.
+- Self-host fonts and icons, or inline/subset icons, to remove Google/jsDelivr
+  dependency and exposed package versioning from the critical render path.
+- Keep production source maps disabled and verify generated assets do not include
+  source-map references after each deployment.
+- Add production security headers in `netlify.toml` where appropriate:
+  `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, and a
+  Content Security Policy tuned to the final asset strategy.
+- Replace `Demo` wording in the public page title if the link is used for a
+  formal TNI pilot or external stakeholder review.
